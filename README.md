@@ -2,7 +2,7 @@
 
 A case study prototype for Evolve's owner Request for Information (RFI) flow, by Matthew Ahlberg.
 
-**Live prototype:** _add your GitHub Pages link here_
+**Live prototype:** https://mjahlberg.github.io/owner-rfi-prototype/
 
 ## The problem
 

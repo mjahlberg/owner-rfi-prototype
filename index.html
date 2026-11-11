@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Evolve Owner RFI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="page">
+<a class="skip" href="#main" id="skip">Skip to main content</a>
+<div class="proto">Owner RFI case study prototype by Matthew Ahlberg. Estimates, rules, and neighborhood data are illustrative placeholders.</div>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Evolve home"><img class="logo-img" src="images/evolve-logo.png" alt="Evolve" width="168" height="36"></a>
+    <nav aria-label="Main"><a href="#how">Become an Owner</a><a href="#faq">Help</a><a href="#top">Favorites</a><a href="#top">Login</a></nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+<div class="hero" id="top">
+  <img class="bg" src="images/hero-interior.jpg" alt="">
+  <div class="wrap">
+    <div>
+      <h1>See what your property could earn with Evolve</h1>
+      <p class="sub">See a rough yearly estimate before you share any contact details.</p>
+    </div>
+    <form class="card" id="est" novalidate aria-labelledby="estTitle">
+      <div id="v1" class="view">
+        <h2 id="estTitle" tabindex="-1">What could your place earn?</h2>
+        <div class="row"><span class="lbl" id="bedL">Bedrooms</span>
+          <div class="step" role="group" aria-labelledby="bedL">
+            <button type="button" id="bedM" aria-label="Fewer bedrooms">&minus;</button>
+            <output id="bedV">3</output>
+            <button type="button" id="bedP" aria-label="More bedrooms">+</button>
+          </div></div>
+        <div class="row"><span class="lbl" id="batL">Bathrooms</span>
+          <div class="step" role="group" aria-labelledby="batL">
+            <button type="button" id="batM" aria-label="Fewer bathrooms">&minus;</button>
+            <output id="batV">2</output>
+            <button type="button" id="batP" aria-label="More bathrooms">+</button>
+          </div></div>
+        <div class="field">
+          <label for="zip">ZIP code</label>
+          <input id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" aria-describedby="zipHelp zipErr" placeholder="For example, 80202">
+          <div class="help" id="zipHelp">The general area is enough. We use it to compare nearby rentals.</div>
+          <div class="err" id="zipErr" role="alert"></div>
+        </div>
+        <button class="btn" type="submit">See my estimate</button>
+      </div>
+      <div id="v2" class="view" hidden>
+        <h2 id="v2t" tabindex="-1">Your rough yearly estimate</h2>
+        <p class="sumline" id="sum"></p>
+        <button class="linkbtn" type="button" id="edit">Edit details</button>
+        <div class="result" id="res"></div>
+        <button class="btn" type="button" id="start">Get started</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="proof">
+  <div class="wrap">
+    <div><b>18% more</b><span>revenue than the market average</span></div>
+    <div><b>30,000+</b><span>owners with thriving properties</span></div>
+    <div><b>4.8 stars</b><span>earned from guests on average</span></div>
+  </div>
+</div>
+
+<section class="tsec" aria-labelledby="own">
+  <div class="wrap">
+    <div class="tcar" id="tcar" aria-roledescription="carousel" aria-labelledby="own">
+      <h2 id="own" class="teye">Stories from real owners</h2>
+      <div class="tslides" aria-live="polite">
+      <div class="tslide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+        <img class="tphoto" src="images/story-stone-entry.jpg" alt="Stone entry with wooden door and potted plants">
+        <div class="tcard"><span class="tq" aria-hidden="true"><svg viewBox="0 0 38 30" width="38" height="30"><path d="M16 21.5a6.5 6.5 0 1 1-13 0c0-8 4.5-14.5 11-18.5l2 2.5c-3.5 2.6-5.6 5.6-6.2 9.3A6.5 6.5 0 0 1 16 21.5zM35 21.5a6.5 6.5 0 1 1-13 0c0-8 4.5-14.5 11-18.5l2 2.5c-3.5 2.6-5.6 5.6-6.2 9.3A6.5 6.5 0 0 1 35 21.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+          <blockquote><p>Everything with Evolve is running like clockwork. It is a dependable and time-saving system that makes having [a vacation rental] painless for me, while I have my own job elsewhere.</p></blockquote>
+          <p class="twho"><b>Alexandra B.</b> Core owner in Tucson, AZ</p></div>
+      </div>
+      <div class="tslide" role="group" aria-roledescription="slide" aria-label="2 of 3" hidden>
+        <img class="tphoto" src="images/story-mediterranean-home.jpg" alt="Mediterranean-style home with palm trees">
+        <div class="tcard"><span class="tq" aria-hidden="true"><svg viewBox="0 0 38 30" width="38" height="30"><path d="M16 21.5a6.5 6.5 0 1 1-13 0c0-8 4.5-14.5 11-18.5l2 2.5c-3.5 2.6-5.6 5.6-6.2 9.3A6.5 6.5 0 0 1 16 21.5zM35 21.5a6.5 6.5 0 1 1-13 0c0-8 4.5-14.5 11-18.5l2 2.5c-3.5 2.6-5.6 5.6-6.2 9.3A6.5 6.5 0 0 1 35 21.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+          <blockquote><p>My Dedicated Performance Advisor is always available to answer any questions and offer helpful advice and recommendations. Since enrolling in Plus, my performance has improved.</p></blockquote>
+          <p class="twho"><b>Debi T.</b> Plus owner in Largo, FL</p></div>
+      </div>
+      <div class="tslide" role="group" aria-roledescription="slide" aria-label="3 of 3" hidden>
+        <img class="tphoto" src="images/story-stone-home.jpg" alt="Stone home with arched windows under cypress trees">
+        <div class="tcard"><span class="tq" aria-hidden="true"><svg viewBox="0 0 38 30" width="38" height="30"><path d="M16 21.5a6.5 6.5 0 1 1-13 0c0-8 4.5-14.5 11-18.5l2 2.5c-3.5 2.6-5.6 5.6-6.2 9.3A6.5 6.5 0 0 1 16 21.5zM35 21.5a6.5 6.5 0 1 1-13 0c0-8 4.5-14.5 11-18.5l2 2.5c-3.5 2.6-5.6 5.6-6.2 9.3A6.5 6.5 0 0 1 35 21.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+          <blockquote><p>I’ve never had any issues with either of my listings with Evolve. I really like their [pricing approach], the coverage they provide, the listings and bookings management, the platform and app, the photography — and I love the price.</p></blockquote>
+          <p class="twho"><b>Drake C.</b> Core owner in Squaw Valley, CA</p></div>
+      </div>
+      </div>
+      <button class="tnav tprev" type="button" id="tPrev" aria-label="Previous story"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="tnav tnext" type="button" id="tNext" aria-label="Next story"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="tdots" id="tDots"><button type="button" aria-label="Story 1" aria-current="true"></button><button type="button" aria-label="Story 2"></button><button type="button" aria-label="Story 3"></button></div>
+    </div>
+  </div>
+</section>
+
+<section id="plans" aria-labelledby="pl">
+  <div class="wrap">
+    <h2 id="pl">Pick the plan that fits</h2>
+    <p class="intro">Fees are a share of booking revenue and start only after guests check in.</p>
+    <div class="plans">
+      <div class="plan"><h3>Core</h3><p class="desc">Essential support and tools to simplify managing your rental.</p>
+        <p class="fee">10%<small>management fee</small></p>
+        <p class="keep" data-keep=".10">Get your estimate to see what you’d keep.</p>
+        <button class="btn sec" type="button" data-plan="Core">Get started</button>
+        <ul><li>Professional photos and a custom listing</li><li>AI-powered dynamic pricing</li><li>$5,000 damage protection and $1M liability insurance</li></ul></div>
+      <div class="plan pop"><span class="tag">Most popular</span><h3>Plus</h3><p class="desc">More personal support and expanded benefits to boost performance.</p>
+        <p class="fee">15%<small>management fee</small></p>
+        <p class="keep" data-keep=".15">Get your estimate to see what you’d keep.</p>
+        <button class="btn" type="button" data-plan="Plus">Get started</button>
+        <ul><li class="inc">Everything in Core, plus:</li><li>A Dedicated Performance Advisor</li><li>Increased listing exposure</li><li>$10,000 damage protection</li></ul></div>
+      <div class="plan"><h3>Pro</h3><p class="desc">Scaled-up services for owners with multiple properties.</p>
+        <p class="fee">Custom<small>management fee</small></p>
+        <p class="keep">Priced by portfolio size.</p>
+        <button class="btn sec" type="button" data-plan="Pro">Talk to us</button>
+        <ul><li class="inc">Everything in Plus, and:</li><li>A dedicated booking website</li><li>Multi-property management tools</li><li>Co-located units offered separately or together</li></ul></div>
+    </div>
+    <p class="planfine">One-time $250 onboarding fee, plus $25 for each additional property. <a href="https://evolve.com/owner/vacation-rental-management-sb" target="_blank" rel="noopener">Compare all plan features<span class="sr"> (opens evolve.com in a new tab)</span></a></p>
+  </div>
+</section>
+
+<div class="sites" aria-label="Booking sites where your listing appears">
+  <div class="marq" id="marq">
+    <ul class="mq"><li><img src="images/site-evolve.png" alt="Evolve" height="29"></li><li><img src="images/site-airbnb.png" alt="Airbnb" height="40"></li><li><img src="images/site-vrbo.png" alt="Vrbo" height="40"></li><li><img src="images/site-booking.png" alt="Booking.com" height="30"></li><li><img src="images/site-expedia.png" alt="Expedia" height="30"></li><li><img src="images/site-google.png" alt="Google" height="38"></li><li><img src="images/site-hopper.png" alt="Hopper" height="40"></li><li><img src="images/site-marriott.png" alt="Homes & Villas by Marriott Bonvoy" height="29"></li></ul>
+  </div>
+</div>
+
+<section aria-labelledby="ctl">
+  <div class="wrap">
+    <h2 id="ctl">You stay in control of your home</h2>
+    <p class="intro">Here’s the split up front, so there are no surprises after you sign up.</p>
+    <div class="split">
+      <div class="panel touch"><h3>We handle</h3>
+        <ul><li>Listing your home in front of millions of travelers</li><li>Pricing and calendar optimization</li><li>Guest messaging and support, day and night</li><li>Vetting guests and coordinating cleaning</li></ul></div>
+      <div class="panel"><h3>You decide</h3>
+        <ul><li>Which dates are open, and which are blocked for your own stays</li><li>House rules, like pets and minimum stays</li><li>Whether to keep going. Exit terms are explained before you commit.</li><li>How involved you want to be</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="how" aria-labelledby="hw">
+  <div class="wrap">
+    <h2 id="hw">From estimate to first booking</h2>
+    <ol class="steps">
+      <li><h3>Get your estimate</h3><p>Share bedrooms, bathrooms, and ZIP. See your numbers right away.</p></li>
+      <li><h3>Talk with an advisor</h3><p>Ask anything about fees, control, and what to expect for your home.</p></li>
+      <li><h3>We prepare your listing</h3><p>Photos, pricing, and setup, with your approval along the way.</p></li>
+      <li><h3>Welcome your first guests</h3><p>Your home goes live, and we handle the day-to-day.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section aria-labelledby="fq" id="faq">
+  <div class="wrap">
+    <h2 id="fq">Questions owners ask</h2>
+    <div style="margin-top:32px">
+      <details><summary>What does Evolve cost?</summary><p>Core is 10% and Plus is 15% of booking revenue; Pro is priced by portfolio size. Fees start only after guests check in. There’s a one-time $250 onboarding fee, plus $25 for each additional property.</p></details>
+      <details><summary>How long until I’m earning?</summary><p>Placeholder copy: your advisor shares a realistic timeline for your market during your first conversation.</p></details>
+      <details><summary>Can I still use my place?</summary><p>Placeholder copy: yes. Block the dates you want for yourself, and the rest of the calendar stays open for bookings.</p></details>
+      <details><summary>What if I want to leave?</summary><p>Placeholder copy: exit terms are covered up front, in plain language, before you sign anything.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="close" aria-labelledby="closeT">
+  <div class="wrap">
+    <h2 id="closeT">See what your place could earn</h2>
+    <p class="intro" id="closeP">Three quick inputs, no contact details needed.</p>
+    <button class="btn" type="button" id="closeBtn">Get my estimate</button>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">Concept prototype for discussion. Not an official Evolve page. The hero photo is a placeholder; swap in licensed property photography.</div></footer>
+
+</div>
+<div class="wiz" id="wiz" role="dialog" aria-modal="true" aria-label="Set up your property" hidden>
+  <div class="wz-head"><button class="logo wz-logo" type="button" id="wzExit" aria-label="Leave setup and go back to the Evolve page"><img class="logo-img" src="images/evolve-logo.png" alt="Evolve" width="168" height="36"></button></div>
+  <div class="wz-prog"><div class="segs"><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div></div></div>
+  <div class="wz-main" id="wzMain"><div class="wz-in">
+    <div class="strip" id="strip" hidden aria-live="polite"><span id="stripL"></span> <b id="stripV"></b></div>
+    <form id="wzForm" novalidate>
+      <div class="pane ov" data-i="0"><div class="ovhead"><h2 class="q" id="q0" tabindex="-1">Let’s set up your place</h2>
+        <p class="promise">Takes about 2 minutes. We only ask how to reach you at the end, and only if you want us to.</p></div>
+        <div>
+        <ol class="stages">
+          <li><span class="sic"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/></svg></span><b>Your place</b><span>What kind of home it is and where you’re starting from.</span></li>
+          <li><span class="sic"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg></span><b>Your address</b><span>Turns your rough range into an estimate for your exact home, and shows your place the way guests would.</span></li>
+          
+          <li><span class="sic"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H9l-5 4v-14Z"/></svg></span><b>You choose what’s next</b><span>Talk with someone, or just get your estimate by email.</span></li>
+        </ol>
+        </div></div>
+
+      <div class="pane" data-i="1" hidden><h2 class="q" id="q1" tabindex="-1">What kind of place is it?</h2>
+        <fieldset><legend class="sr">Property type</legend><div class="chips tiles" data-name="ptype" data-type="radio" data-opts="House|Condo or apartment|Townhome|Cabin|Guest suite or ADU|Something else"></div></fieldset>
+        <fieldset class="else" id="elseBox" hidden><legend>Which is closest?</legend><div class="chips" data-name="ptype2" data-type="radio" data-opts="Tiny home|Timeshare|RV or mobile home"></div></fieldset>
+        <fieldset class="space"><legend>What will guests have?</legend>
+          <div class="paths">
+            <label class="path"><input type="radio" name="space" value="whole"><span><b>The entire place</b><em>Guests have the whole home to themselves.</em></span></label>
+            <label class="path"><input type="radio" name="space" value="room"><span><b>A room</b><em>Guests have their own room and share the rest of the home.</em></span></label>
+          </div></fieldset>
+        <div class="err" id="tyErr" role="alert"></div>
+        <div class="confirm">
+          <p class="clab">From your estimate</p>
+          <div class="gst"><span class="lbl" id="wbL">Bedrooms</span><div class="step" role="group" aria-labelledby="wbL"><button type="button" id="wbM" aria-label="Fewer bedrooms">&minus;</button><output id="wbV">3</output><button type="button" id="wbP" aria-label="More bedrooms">+</button></div></div>
+          <div class="gst"><span class="lbl" id="wtL">Bathrooms</span><div class="step" role="group" aria-labelledby="wtL"><button type="button" id="wtM" aria-label="Fewer bathrooms">&minus;</button><output id="wtV">2</output><button type="button" id="wtP" aria-label="More bathrooms">+</button></div></div>
+        </div></div>
+
+      <div class="pane" data-i="2" hidden><h2 class="q" id="q2" tabindex="-1">Where are you starting from?</h2>
+        <p class="help">There’s no wrong answer. This tells us how much setup help you’d want.</p>
+        <fieldset><legend>Is it furnished?</legend><div class="chips" data-name="furn" data-type="radio" data-opts="Fully furnished|Partly furnished|Not yet"></div></fieldset>
+        <fieldset><legend>Is it rented out right now?</legend><div class="chips" data-name="rent" data-type="radio" data-opts="Not right now|Yes, short-term stays|Yes, long-term tenants"></div></fieldset>
+        <div class="err" id="stErr" role="alert"></div></div>
+
+      <div class="pane" data-i="4" hidden><h2 class="q" id="q4" tabindex="-1">Where is it?</h2>
+        <p class="help">Your exact address sharpens your estimate and lets us check local rental rules.</p>
+        <p class="assure">We only use your address for your estimate. It isn’t shared, and we won’t reach out until you ask us to.</p>
+        <div class="field"><label for="st">Street address</label><input id="st" autocomplete="address-line1"></div>
+        <div class="field"><label for="un">Apt, suite, or unit (optional)</label><input id="un" autocomplete="address-line2"></div>
+        <div class="field"><label for="ci">City</label><input id="ci" autocomplete="address-level2"></div>
+        <div class="g2"><div class="field"><label for="sa">State</label><input id="sa" maxlength="2" autocomplete="address-level1" placeholder="CO"></div>
+        <div class="field"><label for="az">ZIP code</label><input id="az" inputmode="numeric" maxlength="5" autocomplete="postal-code"></div></div>
+        <div class="err" id="adErr" role="alert"></div></div>
+
+      <div class="pane" data-i="5" hidden><h2 class="q" id="q5" tabindex="-1">Here’s what your place could earn</h2>
+        <article class="lst" id="lst"></article>
+        <section class="compsec" aria-labelledby="compT"><h3 id="compT">Evolve homes like yours nearby</h3><ul class="comps" id="comps"></ul><p class="cnote">Sample photos. Real Evolve listings would appear here, and we’ll set up professional photos for your place when you’re ready.</p></section>
+        <button class="linkbtn" type="button" id="lstEdit">Change details</button></div>
+
+      <div class="pane" data-i="6" hidden><h2 class="q" id="q6" tabindex="-1">How would you like to continue?</h2>
+        <fieldset><legend class="sr">Next step</legend>
+          <div class="paths">
+            <label class="path"><input type="radio" name="path" value="talk"><span><b>Talk with someone about listing</b><em>An Evolve advisor calls or texts when it suits you.</em></span></label>
+            <label class="path"><input type="radio" name="path" value="email"><span><b>Email me my estimate</b><em>Take your time. No calls unless you ask for one.</em></span></label>
+          </div></fieldset>
+        <div id="cFields" hidden>
+          <div class="g2"><div class="field"><label for="fn">First name</label><input id="fn" autocomplete="given-name"></div>
+          <div class="field"><label for="ln">Last name</label><input id="ln" autocomplete="family-name"></div></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+          <div class="field"><label for="ph" id="phL">Phone</label><input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="(303) 555-0123"></div>
+          <div id="talkOnly" hidden>
+            <fieldset><legend>Call or text?</legend><div class="chips" data-name="via" data-type="radio" data-opts="Call me|Text me"></div></fieldset>
+            <fieldset><legend>When’s a good time?</legend><div class="chips" data-name="when" data-type="radio" data-opts="As soon as possible|Morning|Afternoon|Evening"></div></fieldset>
+          </div>
+        </div>
+        <div class="err" id="ctErr" role="alert"></div></div>
+
+      <div class="pane" data-i="7" hidden><h2 class="q" id="q7" tabindex="-1">You’re all set</h2>
+        <p class="help" id="dn"></p><dl class="recap" id="recap"></dl>
+        <button class="btn ink" type="button" id="wzDone" style="width:auto;padding:0 28px;margin-top:24px">Back to Evolve</button></div>
+
+      <div class="pane" data-i="8" hidden><h2 class="q" id="q8" tabindex="-1">We can’t manage this kind of place yet</h2>
+        <p class="help" id="nfMsg">Evolve manages self-contained homes with their own entrance, kitchen, and bathroom. Shared homes, timeshares, RVs, and mobile homes aren’t a fit right now.</p>
+        <div id="nfForm"><div class="field"><label for="nfEmail">Email (optional)</label><input id="nfEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>
+        <div class="err" id="nfErr" role="alert"></div>
+        <div class="wz-btns"><button class="linkbtn" type="button" id="nfBack">Change my answers</button><button class="btn ink" type="button" id="nfGo" style="width:auto;margin:0 0 0 auto">Let me know if that changes</button></div></div>
+        <p class="sent" id="nfSent" hidden></p></div>
+    </form>
+  </div></div>
+  <div class="wz-foot" id="wzFoot">
+    <div class="wz-row"><div class="wz-btns"><button class="linkbtn" type="button" id="wzBack">Back</button><button class="btn" type="submit" form="wzForm" id="wzNext">Get started</button></div></div></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

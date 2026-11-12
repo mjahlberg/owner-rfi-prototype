@@ -355,3 +355,11 @@ fieldset.space{margin-top:22px}
 .upnext{margin-top:22px;padding:12px 14px;border-radius:10px;background:var(--alt);color:var(--ink);font-size:.96rem;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
 .upnext strong{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 @media (max-width:560px){.pane[data-i="2"] .chips.tiles{grid-template-columns:1fr;gap:8px}.pane[data-i="2"] .tiles .chip span{min-height:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;padding:12px 14px}}
+
+.startnote{margin-top:10px;text-align:center}
+.nexth{font-size:1.05rem;margin-top:26px}
+.nextsteps{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0;counter-reset:ns}
+.nextsteps li{counter-increment:ns;display:grid;grid-template-columns:28px 1fr;gap:2px 12px;padding:10px 0;border-top:1px solid var(--line)}
+.nextsteps li::before{content:counter(ns);grid-row:1/3;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font:700 .8rem/24px var(--font-d);text-align:center;margin-top:2px}
+.nextsteps b{color:var(--ink)}
+.nextsteps span{color:var(--muted);font-size:.96rem}

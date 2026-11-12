@@ -63,6 +63,7 @@
   var stages=['','Your place','Your address','Your next step'];
   var stageOf=[0,1,1,1,2,2,3,3,1],first={1:1,2:4,3:6},count={1:2,2:2,3:1};
   var NOFIT=['Timeshare','RV or mobile home'];
+  function CITY(z){var m={'80424':['Breckenridge','CO'],'81611':['Aspen','CO']};if(m[z])return m[z];if(/^80[23]/.test(z))return ['Denver','CO'];return null}
   var HOOD={'80206':'Congress Park, Denver','80218':'Cheesman Park, Denver','80202':'LoDo, Denver','80211':'Highlands, Denver','80205':'Five Points, Denver','80424':'Breckenridge','81611':'Aspen'};
   var TYPEW={'House':1,'Condo or apartment':.9,'Townhome':.95,'Cabin':1.1,'Guest suite or ADU':.75,'Tiny home':.7};
   var exact=null;
@@ -87,6 +88,7 @@
   document.querySelectorAll('input[name="furn"],input[name="rent"]').forEach(function(i){i.addEventListener('change',function(){$('stErr').textContent=''})});
   document.querySelectorAll('input[name="path"]').forEach(function(i){i.addEventListener('change',function(){
     var t=i.value==='talk';$('cFields').hidden=false;$('talkOnly').hidden=!t;
+    if(t&&!one('when')){var d=document.querySelector('#wiz input[name="when"][value="As soon as possible"]');if(d)d.checked=true}
     $('phHelp').textContent=t?'So your advisor can reach you.':'Only used if you’d like to talk later.';
     $('wzNext').textContent=t?'Request a conversation':'Send my estimate';$('ctErr').textContent='';
   })});
@@ -155,7 +157,7 @@
     if(n===5)listing();
     wiz.classList.toggle('wide',n===5);
     $('wzFoot').hidden=n>=7;
-    $('wzBack').textContent=n===0?'Not now':'Back';
+    $('wzBack').textContent='Back';
     var nx=$('wzNext'),p=one('path');
     nx.textContent=n===0?'Get started':n===4?'Sharpen my estimate':n===5?'Continue':n===6?(p==='talk'?'Request a conversation':p==='email'?'Send my estimate':'Continue'):'Next';
     nx.classList.add('ink');
@@ -166,7 +168,8 @@
     opener=document.activeElement;
     $('page').inert=true;wiz.hidden=false;document.body.classList.add('lock');
     $('az').value=$('az').value||zip.value;wlab();
-    go(0);
+    var c=CITY(zip.value);if(c){if(!$('ci').value)$('ci').value=c[0];if(!$('sa').value)$('sa').value=c[1]}
+    go(1);
   }
   function closeWiz(){
     wiz.hidden=true;$('page').inert=false;document.body.classList.remove('lock');
@@ -178,7 +181,7 @@
     b.onclick=function(){s.plan=b.dataset.plan;if(s.lo)openWiz();else toEstimate()};
   });
   $('closeBtn').onclick=function(){if(s.lo){s.plan='';openWiz()}else toEstimate()};$('wzExit').onclick=closeWiz;$('wzDone').onclick=closeWiz;
-  $('wzBack').onclick=function(){if(cur===0)closeWiz();else go(cur===4?2:cur-1)};
+  $('wzBack').onclick=function(){if(cur<=1)closeWiz();else go(cur===4?2:cur-1)};
   $('lstEdit').onclick=function(){go(1)};
   $('nfBack').onclick=function(){document.querySelectorAll('input[name="ptype"],input[name="ptype2"],input[name="space"]').forEach(function(i){i.checked=false});$('elseBox').hidden=true;go(1)};
   $('nfGo').onclick=function(){
@@ -224,6 +227,16 @@
       $('dn').textContent=p==='talk'?
         'Thanks, '+fn+'. An Evolve advisor will '+(one('via')==='Text me'?'text':'call')+' you '+(w==='as soon as possible'?'shortly':'in the '+w)+'. We also sent your estimate to '+v+'.':
         'Thanks, '+fn+'. Your estimate is on its way to '+v+'. When you’re ready to talk, reply to that email or pick a time.';
+      var ns=$('nextsteps');ns.textContent='';
+      (p==='talk'?[
+        ['Now','Your full estimate is in your inbox at '+v+'.'],
+        [w==='as soon as possible'?'Today':'This '+w,'Your advisor '+(one('via')==='Text me'?'texts':'calls')+' you at the number you gave. They’ll have your details, so there’s no starting over.'],
+        ['On the call','A 20-minute walkthrough of your estimate, fees, and timeline. No commitment.']
+      ]:[
+        ['Now','Your full estimate is in your inbox at '+v+'.'],
+        ['In a few days','An advisor may email to answer questions. Reply or pick a time whenever you’re ready.'],
+        ['When you’re ready','A 20-minute walkthrough of your estimate, fees, and timeline. No commitment.']
+      ]).forEach(function(x){var li=document.createElement('li');var b=document.createElement('b');b.textContent=x[0];var sp=document.createElement('span');sp.textContent=x[1];li.append(b,sp);ns.append(li)});
       var dl=$('recap');dl.textContent='';
       row(dl,'Estimate',money(r[0])+' to '+money(r[1])+' a year');
       if(s.plan)row(dl,'Plan',s.plan);

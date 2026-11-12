@@ -57,6 +57,7 @@
         <button class="linkbtn" type="button" id="edit">Edit details</button>
         <div class="result" id="res"></div>
         <button class="btn" type="button" id="start">Get started</button>
+        <p class="note startnote">Takes about 2 minutes. We only ask how to reach you at the end.</p>
       </div>
     </form>
   </div>
@@ -188,17 +189,6 @@
   <div class="wz-main" id="wzMain"><div class="wz-in">
     <div class="strip" id="strip" hidden aria-live="polite"><span id="stripL"></span> <b id="stripV"></b></div>
     <form id="wzForm" novalidate>
-      <div class="pane ov" data-i="0"><div class="ovhead"><h2 class="q" id="q0" tabindex="-1">Let’s set up your place</h2>
-        <p class="promise">Takes about 2 minutes. We only ask how to reach you at the end, and only if you want us to.</p></div>
-        <div>
-        <ol class="stages">
-          <li><span class="sic"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/></svg></span><b>Your place</b><span>What kind of home it is and where you’re starting from.</span></li>
-          <li><span class="sic"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg></span><b>Your address</b><span>Turns your rough range into an estimate for your exact home, and shows your place the way guests would.</span></li>
-          
-          <li><span class="sic"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v10H9l-5 4v-14Z"/></svg></span><b>You choose what’s next</b><span>Talk with someone, or just get your estimate by email.</span></li>
-        </ol>
-        </div></div>
-
       <div class="pane" data-i="1" hidden><h2 class="q" id="q1" tabindex="-1">What kind of place is it?</h2>
         <fieldset><legend class="sr">Property type</legend><div class="chips tiles" data-name="ptype" data-type="radio" data-opts="House|Condo or apartment|Townhome|Cabin|Guest suite or ADU|Something else"></div></fieldset>
         <fieldset class="else" id="elseBox" hidden><legend>Which is closest?</legend><div class="chips" data-name="ptype2" data-type="radio" data-opts="Tiny home|Timeshare|RV or mobile home"></div></fieldset>
@@ -258,8 +248,8 @@
       <div class="pane" data-i="6" hidden><h2 class="q" id="q6" tabindex="-1">How would you like to continue?</h2>
         <fieldset><legend class="sr">Next step</legend>
           <div class="paths">
-            <label class="path"><input type="radio" name="path" value="talk"><span><b>Talk with someone about listing</b><em>An Evolve advisor calls or texts when it suits you.</em></span></label>
-            <label class="path"><input type="radio" name="path" value="email"><span><b>Email me my estimate</b><em>Take your time. We’ll email your estimate first, and an advisor may follow up.</em></span></label>
+            <label class="path"><input type="radio" name="path" value="talk"><span><b>Talk with someone about listing</b><em>An advisor calls or texts at the time you pick, usually the same day.</em></span></label>
+            <label class="path"><input type="radio" name="path" value="email"><span><b>Email me my estimate</b><em>Your estimate arrives in minutes. An advisor may follow up in a few days.</em></span></label>
           </div></fieldset>
         <div id="cFields" hidden>
           <div class="g2"><div class="field"><label for="fn">First name</label><input id="fn" autocomplete="given-name"></div>
@@ -274,7 +264,9 @@
         <div class="err" id="ctErr" role="alert"></div></div>
 
       <div class="pane" data-i="7" hidden><h2 class="q" id="q7" tabindex="-1">You’re all set</h2>
-        <p class="help" id="dn"></p><dl class="recap" id="recap"></dl>
+        <p class="help" id="dn"></p>
+        <h3 class="nexth">What happens next</h3><ol class="nextsteps" id="nextsteps"></ol>
+        <h3 class="nexth">What you shared</h3><dl class="recap" id="recap"></dl>
         <button class="btn ink" type="button" id="wzDone" style="width:auto;padding:0 28px;margin-top:24px">Back to Evolve</button></div>
 
       <div class="pane" data-i="8" hidden><h2 class="q" id="q8" tabindex="-1">We can’t manage this kind of place yet</h2>

@@ -184,7 +184,7 @@
 </div>
 <div class="wiz" id="wiz" role="dialog" aria-modal="true" aria-label="Set up your property" hidden>
   <div class="wz-head"><button class="logo wz-logo" type="button" id="wzExit" aria-label="Leave setup and go back to the Evolve page"><img class="logo-img" src="images/evolve-logo.png" alt="Evolve" width="168" height="36"></button></div>
-  <div class="wz-prog"><div class="segs"><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div></div></div>
+  <div class="wz-prog"><div class="segs"><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div><div class="seg"><i aria-hidden="true"><b></b></i><span class="slab"></span></div></div><p class="mlab" id="mlab"></p></div>
   <div class="wz-main" id="wzMain"><div class="wz-in">
     <div class="strip" id="strip" hidden aria-live="polite"><span id="stripL"></span> <b id="stripV"></b></div>
     <form id="wzForm" novalidate>
@@ -239,13 +239,13 @@
         <fieldset><legend class="sr">Next step</legend>
           <div class="paths">
             <label class="path"><input type="radio" name="path" value="talk"><span><b>Talk with someone about listing</b><em>An Evolve advisor calls or texts when it suits you.</em></span></label>
-            <label class="path"><input type="radio" name="path" value="email"><span><b>Email me my estimate</b><em>Take your time. No calls unless you ask for one.</em></span></label>
+            <label class="path"><input type="radio" name="path" value="email"><span><b>Email me my estimate</b><em>Take your time. We’ll email your estimate first, and an advisor may follow up.</em></span></label>
           </div></fieldset>
         <div id="cFields" hidden>
           <div class="g2"><div class="field"><label for="fn">First name</label><input id="fn" autocomplete="given-name"></div>
           <div class="field"><label for="ln">Last name</label><input id="ln" autocomplete="family-name"></div></div>
           <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
-          <div class="field"><label for="ph" id="phL">Phone</label><input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="(303) 555-0123"></div>
+          <div class="field"><label for="ph" id="phL">Phone</label><input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="(303) 555-0123" aria-describedby="phHelp"><div class="help" id="phHelp">So your advisor can reach you.</div></div>
           <div id="talkOnly" hidden>
             <fieldset><legend>Call or text?</legend><div class="chips" data-name="via" data-type="radio" data-opts="Call me|Text me"></div></fieldset>
             <fieldset><legend>When’s a good time?</legend><div class="chips" data-name="when" data-type="radio" data-opts="As soon as possible|Morning|Afternoon|Evening"></div></fieldset>

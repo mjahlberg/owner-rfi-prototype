@@ -293,3 +293,17 @@ fieldset.space{margin-top:22px}
 .cm,.cr{font-size:.85rem;color:var(--muted)}
 .cnote{margin-top:10px;font-size:.9rem;color:var(--muted)}
 @media (max-width:560px){.comps{grid-template-columns:1fr}.cph{aspect-ratio:16/9}}
+
+/* phone fixes */
+.mlab{display:none}
+@media (max-width:560px){
+  header.top nav{display:none}
+  .slab{display:none}
+  .mlab{display:block;margin:8px 0 0;font-size:.9rem;color:var(--muted)}
+  .mlab strong{color:var(--ink)}
+  .lest b{font-size:1.3rem}
+  #nfForm .wz-btns{flex-direction:column-reverse;align-items:stretch}
+  #nfForm .wz-btns .btn{width:100%!important;margin:0!important}
+  .comps{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+  .comp{scroll-snap-align:start}
+}

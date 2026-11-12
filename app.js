@@ -81,7 +81,7 @@
   document.querySelectorAll('input[name="furn"],input[name="rent"]').forEach(function(i){i.addEventListener('change',function(){$('stErr').textContent=''})});
   document.querySelectorAll('input[name="path"]').forEach(function(i){i.addEventListener('change',function(){
     var t=i.value==='talk';$('cFields').hidden=false;$('talkOnly').hidden=!t;
-    $('phL').textContent=t?'Phone':'Phone (optional)';
+    $('phHelp').textContent=t?'So your advisor can reach you.':'Only used if you’d like to talk later.';
     $('wzNext').textContent=t?'Request a conversation':'Send my estimate';$('ctErr').textContent='';
   })});
   function typeShort(){var t=ptype();return {'House':'house','Condo or apartment':'condo','Townhome':'townhome','Cabin':'cabin','Guest suite or ADU':'guest suite','Tiny home':'tiny home'}[t]||'home'}
@@ -119,6 +119,7 @@
     cur=n;
     Array.prototype.forEach.call(panes,function(p){p.hidden=+p.dataset.i!==n});
     var st=stageOf[n],done=n===7;
+    $('mlab').innerHTML=(st&&!done&&n!==8)?'<strong>Step '+st+' of 3</strong> · '+stages[st]:'';
     document.querySelectorAll('.slab').forEach(function(l,k){l.innerHTML=(st===k+1&&!done&&n!==8)?'<strong>Step '+st+' of 3</strong><span>'+stages[st]+'</span>':''});
     document.querySelectorAll('.segs i b').forEach(function(b,k){
       var g=k+1,f=0;
@@ -188,7 +189,7 @@
       else if(!fn){err='Enter your first name.';foc='fn'}
       else if(!ln){err='Enter your last name.';foc='ln'}
       else if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){err='Enter a valid email address, like you@example.com.';foc='email'}
-      else if((p==='talk'||ph)&&ph.length!==10){err='Enter a 10-digit phone number.';foc='ph'}
+      else if(ph.length!==10){err='Enter a 10-digit phone number.';foc='ph'}
       else if(p==='talk'&&!one('via')){err='Choose call or text.'}
       else if(p==='talk'&&!one('when')){err='Choose a good time to reach you.'}
       if(err){$('ctErr').textContent=err;if(foc)$(foc).focus();return}
@@ -196,7 +197,7 @@
       var w=one('when').toLowerCase(),r=range();
       $('dn').textContent=p==='talk'?
         'Thanks, '+fn+'. An Evolve advisor will '+(one('via')==='Text me'?'text':'call')+' you '+(w==='as soon as possible'?'shortly':'in the '+w)+'. We also sent your estimate to '+v+'.':
-        'Thanks, '+fn+'. Your estimate is on its way to '+v+'. We won’t call unless you ask us to.';
+        'Thanks, '+fn+'. Your estimate is on its way to '+v+'. When you’re ready to talk, reply to that email or pick a time.';
       var dl=$('recap');dl.textContent='';
       row(dl,'Estimate',money(r[0])+' to '+money(r[1])+' a year');
       if(s.plan)row(dl,'Plan',s.plan);

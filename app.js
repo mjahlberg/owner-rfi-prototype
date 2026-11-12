@@ -85,7 +85,7 @@
     $('wzNext').textContent=t?'Request a conversation':'Send my estimate';$('ctErr').textContent='';
   })});
   function typeShort(){var t=ptype();return {'House':'house','Condo or apartment':'condo','Townhome':'townhome','Cabin':'cabin','Guest suite or ADU':'guest suite','Tiny home':'tiny home'}[t]||'home'}
-  var COMPS={'Denver':['Denver Square near the park','Brick bungalow off Colfax','Updated home on a tree-lined block'],'Breckenridge':['Ski-area condo near Main Street','Mountain home with a hot tub','Townhome by the gondola'],'Aspen':['Mountain home near downtown','Condo by the lifts','Townhome with mountain views']};
+  var COMPS={'Denver':['Cottage near Cheesman Park','Classic home with a picket fence','Updated bungalow off Colfax'],'Breckenridge':['Ski-area condo near Main Street','Mountain home with a hot tub','Townhome by the gondola'],'Aspen':['Mountain home near downtown','Condo by the lifts','Townhome with mountain views']};
   var HOUSE_SVG='<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/></svg>';
   function listing(){
     var r=range(),furn=one('furn'),rent=one('rent'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
@@ -108,7 +108,7 @@
       var c=document.createElement('li');c.className='comp';
       c.innerHTML='<div class="cph"><img alt=""></div><div class="cbd"><b></b><span class="cm"></span><span class="cr"></span></div>';
       var ci=c.querySelector('img'),hero=document.querySelector('.hero .bg').getAttribute('src'),tp=document.querySelectorAll('.tphoto');
-      ci.src=[hero,tp[0].getAttribute('src'),hero][k];ci.style.objectPosition=['22% 50%','50% 55%','92% 50%'][k];
+      ci.src=['images/comp-cottage.jpg','images/comp-picket-fence.jpg',hero][k];ci.style.objectPosition=['50% 50%','50% 50%','22% 50%'][k];
       c.querySelector('b').textContent=n;
       c.querySelector('.cm').textContent=plural(bd,'bedroom','bedrooms')+' · about '+money(nt)+' a night';
       c.querySelector('.cr').textContent='★ '+rt+' ('+rv+' reviews)';

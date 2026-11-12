@@ -80,10 +80,10 @@
     $('stripL').textContent=(exact?'Estimate for '+exact.street+':':'Rough estimate:')+' ';
     $('stripV').textContent=money(r[0])+' to '+money(r[1])+' a year';
   }
-  function wlab(){$('wbV').textContent=s.beds;$('wtV').textContent=s.baths;$('wbV').setAttribute('aria-label',plural(s.beds,'bedroom','bedrooms'));$('wtV').setAttribute('aria-label',plural(s.baths,'bathroom','bathrooms'))}
+  function wlab(){if(!$('wbV'))return;$('wbV').textContent=s.beds;$('wtV').textContent=s.baths;$('wbV').setAttribute('aria-label',plural(s.beds,'bedroom','bedrooms'));$('wtV').setAttribute('aria-label',plural(s.baths,'bathroom','bathrooms'))}
   function wbump(k,d,min,max){s[k]=Math.min(max,Math.max(min,s[k]+d));lab();wlab();estimate();strip()}
-  $('wbM').onclick=function(){wbump('beds',-1,1,10)};$('wbP').onclick=function(){wbump('beds',1,1,10)};
-  $('wtM').onclick=function(){wbump('baths',-.5,1,8)};$('wtP').onclick=function(){wbump('baths',.5,1,8)};
+  if($('wbM')){$('wbM').onclick=function(){wbump('beds',-1,1,10)};$('wbP').onclick=function(){wbump('beds',1,1,10)};
+  $('wtM').onclick=function(){wbump('baths',-.5,1,8)};$('wtP').onclick=function(){wbump('baths',.5,1,8)};}
   document.querySelectorAll('input[name="ptype"],input[name="ptype2"],input[name="space"]').forEach(function(i){i.addEventListener('change',function(){$('tyErr').textContent='';$('elseBox').hidden=one('ptype')!=='Something else';strip()})});
   document.querySelectorAll('input[name="furn"],input[name="rent"]').forEach(function(i){i.addEventListener('change',function(){$('stErr').textContent=''})});
   document.querySelectorAll('input[name="path"]').forEach(function(i){i.addEventListener('change',function(){

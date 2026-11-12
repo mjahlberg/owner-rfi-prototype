@@ -19,7 +19,7 @@ So this flow keeps owners anonymous until they've gotten something back, then ma
 3. **Where you're starting from.** Furnished or not, and whether it's rented out now. Both are one tap.
 4. **Your address.** Framed as the way to get an exact estimate for their home.
 5. **What your place could earn.** The sharper estimate, a local rules check, and similar Evolve homes nearby that explain where the number comes from.
-6. **You choose what's next.** Talk with someone (call or text, at a good time) or get the estimate by email first. Both paths collect the same details, and sales can see which owners are ready.
+6. **Where to send your estimate.** Name, email, and phone, then one choice: set up a call with an advisor, or just get the estimate for now. Sales can see which owners are ready, and the advisor emails to schedule instead of calling out of the blue.
 
 Owners whose property isn't a fit get a kind exit with an option to hear if that changes.
 

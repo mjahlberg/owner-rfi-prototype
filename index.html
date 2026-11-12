@@ -234,21 +234,16 @@
           <p class="cnote">Sample photos and listings. Real Evolve homes nearby would appear here.</p></section>
         <button class="linkbtn" type="button" id="lstEdit">Change details</button></div>
 
-      <div class="pane" data-i="6" hidden><h2 class="q" id="q6" tabindex="-1">How would you like to continue?</h2>
-        <fieldset><legend class="sr">Next step</legend>
+      <div class="pane" data-i="6" hidden><h2 class="q" id="q6" tabindex="-1">Where should we send your estimate?</h2>
+        <div class="g2"><div class="field"><label for="fn">First name</label><input id="fn" autocomplete="given-name"></div>
+        <div class="field"><label for="ln">Last name</label><input id="ln" autocomplete="family-name"></div></div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+        <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="(303) 555-0123"></div>
+        <fieldset class="space"><legend>Want to talk with an advisor?</legend>
           <div class="paths">
-            <label class="path"><input type="radio" name="path" value="talk"><span><b>Talk with someone about listing</b><em>An advisor calls at the time you pick, usually the same day.</em></span></label>
-            <label class="path"><input type="radio" name="path" value="email"><span><b>Email me my estimate</b><em>Your estimate arrives in minutes. An advisor may follow up in a few days.</em></span></label>
+            <label class="path"><input type="radio" name="path" value="talk"><span><b>Yes, set up a call</b><em>We’ll email you today to find a time that works.</em></span></label>
+            <label class="path"><input type="radio" name="path" value="email"><span><b>Not yet, just send my estimate</b><em>Take your time. Reach out whenever you’re ready.</em></span></label>
           </div></fieldset>
-        <div id="cFields" hidden>
-          <div class="g2"><div class="field"><label for="fn">First name</label><input id="fn" autocomplete="given-name"></div>
-          <div class="field"><label for="ln">Last name</label><input id="ln" autocomplete="family-name"></div></div>
-          <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
-          <div class="field"><label for="ph" id="phL">Phone</label><input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="(303) 555-0123" aria-describedby="phHelp"><div class="help" id="phHelp">So your advisor can reach you.</div></div>
-          <div id="talkOnly" hidden>
-            <fieldset><legend>When’s a good time?</legend><div class="chips" data-name="when" data-type="radio" data-opts="As soon as possible|Morning|Afternoon|Evening"></div></fieldset>
-          </div>
-        </div>
         <div class="err" id="ctErr" role="alert"></div></div>
 
       <div class="pane done" data-i="7" hidden><h2 class="q" id="q7" tabindex="-1">You’re all set</h2>

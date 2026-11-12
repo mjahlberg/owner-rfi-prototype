@@ -84,12 +84,7 @@
   $('wtM').onclick=function(){wbump('baths',-.5,1,8)};$('wtP').onclick=function(){wbump('baths',.5,1,8)};}
   document.querySelectorAll('input[name="ptype"],input[name="ptype2"],input[name="space"]').forEach(function(i){i.addEventListener('change',function(){$('tyErr').textContent='';$('elseBox').hidden=one('ptype')!=='Something else';strip()})});
   document.querySelectorAll('input[name="furn"],input[name="rent"]').forEach(function(i){i.addEventListener('change',function(){$('stErr').textContent=''})});
-  document.querySelectorAll('input[name="path"]').forEach(function(i){i.addEventListener('change',function(){
-    var t=i.value==='talk';$('cFields').hidden=false;$('talkOnly').hidden=!t;
-    if(t&&!one('when')){var d=document.querySelector('#wiz input[name="when"][value="As soon as possible"]');if(d)d.checked=true}
-    $('phHelp').textContent=t?'So your advisor can reach you.':'Only used if you’d like to talk later.';
-    $('wzNext').textContent=t?'Request a conversation':'Send my estimate';$('ctErr').textContent='';
-  })});
+  document.querySelectorAll('input[name="path"]').forEach(function(i){i.addEventListener('change',function(){$('ctErr').textContent=''})});
   function typeShort(){var t=ptype();return {'House':'house','Condo or apartment':'condo','Townhome':'townhome','Cabin':'cabin','Guest suite or ADU':'guest suite','Tiny home':'tiny home'}[t]||'home'}
   var COMPS={'Denver':['Cottage near Cheesman Park','Classic home with a picket fence','Updated bungalow off Colfax'],'Breckenridge':['Ski-area condo near Main Street','Mountain home with a hot tub','Townhome by the gondola'],'Aspen':['Mountain home near downtown','Condo by the lifts','Townhome with mountain views']};
   var HOUSE_SVG='<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/></svg>';
@@ -146,7 +141,7 @@
     $('wzFoot').hidden=n>=7;
     $('wzBack').textContent='Back';
     var nx=$('wzNext'),p=one('path');
-    nx.textContent=n===0?'Get started':n===4?'See my exact estimate':n===5?'Continue':n===6?(p==='talk'?'Request a conversation':p==='email'?'Send my estimate':'Continue'):'Next';
+    nx.textContent=n===0?'Get started':n===4?'See my exact estimate':n===5?'Continue':n===6?'Send my estimate':'Next';
     nx.classList.add('ink');
     wiz.classList.toggle('ov',n===0);
     $('wzMain').scrollTop=0;$('q'+n).focus();
@@ -201,18 +196,16 @@
     if(cur===6){
       var p=one('path'),fn=$('fn').value.trim(),ln=$('ln').value.trim(),v=$('email').value.trim(),ph=$('ph').value.replace(/\D/g,'');
       var err='',foc='';
-      if(!p)err='Choose how you’d like to continue.';
-      else if(!fn){err='Enter your first name.';foc='fn'}
+      if(!fn){err='Enter your first name.';foc='fn'}
       else if(!ln){err='Enter your last name.';foc='ln'}
       else if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){err='Enter a valid email address, like you@example.com.';foc='email'}
       else if(ph.length!==10){err='Enter a 10-digit phone number.';foc='ph'}
-      else if(p==='talk'&&!one('when')){err='Choose a good time to reach you.'}
+      else if(!p)err='Choose whether you’d like to talk with an advisor.';
       if(err){$('ctErr').textContent=err;if(foc)$(foc).focus();return}
       $('ctErr').textContent='';
-      var w=one('when').toLowerCase(),r=range();
-      var via='call',when=w==='as soon as possible'?'today':'this '+w;
+      var r=range();
       $('q7').textContent='You’re all set, '+fn;
-      $('dn').textContent=p==='talk'?'An advisor will '+via+' you '+when+'.':'Your estimate is on its way to '+v+'.';
+      $('dn').textContent='Your estimate is on its way to '+v+'.';
       $('dEst').textContent=money(r[0])+' to '+money(r[1])+' a year';
       $('dAddr').textContent=addr();
       var tg=$('dTags');tg.textContent='';
@@ -220,7 +213,7 @@
       var ns=$('nextsteps');ns.textContent='';
       (p==='talk'?[
         ['Now','Your full estimate is in your inbox.'],
-        [when.charAt(0).toUpperCase()+when.slice(1),'Your advisor '+(via==='text'?'texts':'calls')+'. They’ll already have your details.'],
+        ['Today','Your advisor emails you to find a time for a call. They’ll already have your details.'],
         ['On the call','20 minutes on your estimate, fees, and timeline. No commitment.']
       ]:[
         ['Now','Your full estimate is in your inbox.'],

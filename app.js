@@ -58,7 +58,7 @@
   function picked(n){return Array.prototype.map.call(document.querySelectorAll('input[name="'+n+'"]:checked'),function(x){return x.value})}
   /* wizard */
   var wiz=$('wiz'),panes=document.querySelectorAll('.pane');
-  var stages=['','Your place','Your address','Your next step'];
+  var stages=['','Your place','Your estimate','Your next step'];
   var stageOf=[0,1,1,1,2,2,3,3,1],first={1:1,2:4,3:6},count={1:2,2:2,3:1};
   var NOFIT=['Timeshare','RV or mobile home'];
   function CITY(z){var m={'80424':['Breckenridge','CO'],'81611':['Aspen','CO']};if(m[z])return m[z];if(/^80[23]/.test(z))return ['Denver','CO'];return null}
@@ -111,18 +111,6 @@
     txt($('rvKeep'),money(r100(r[0]*(1-fee)))+' to '+money(r100(r[1]*(1-fee))));
     txt($('rvCovT'),'What your '+Math.round(fee*100)+'% covers');
     txt($('rvKeepL'),'You’d keep on '+plan+' ('+Math.round(fee*100)+'% fee)');
-    txt($('rvRent'),rent==='Yes, long-term tenants'?'We’ll compare this with your current rent on your call.':rent==='Yes, short-term stays'?'We’ll move your current listing and reviews over.':'');$('rvRent').hidden=!$('rvRent').textContent;
-    /* seasonality */
-    var tot=SEASON.reduce(function(a,b){return a+b},0),mx=Math.max.apply(null,SEASON),bars=$('bars');bars.textContent='';
-    var top=SEASON.map(function(v,i){return [v,i]}).sort(function(a,b){return b[0]-a[0]}).slice(0,3).map(function(x){return x[1]});
-    SEASON.forEach(function(v,i){
-      var amt=money(r100(mid*v/tot)),col=mk('div','bar'+(top.indexOf(i)>-1?' peak':''));
-      var m=mk('i');m.style.height=Math.round(v/mx*100)+'%';
-      var tip=mk('span','tip',MONTHS[i]+' · about '+amt);
-      col.append(m,mk('b',null,MONTHS[i][0]),tip);col.tabIndex=0;col.setAttribute('aria-label',MONTHS[i]+', about '+amt);
-      bars.append(col);
-    });
-    bars.setAttribute('aria-label','Estimated earnings by month. Busiest in '+top.slice().sort(function(a,b){return a-b}).map(function(i){return MONTHS[i]}).join(', ')+'.');
     /* how you compare */
     var names=COMPS[city]||['Home near downtown','Quiet home with a yard','Updated home near shops'];
     var cs=$('comps');cs.textContent='';

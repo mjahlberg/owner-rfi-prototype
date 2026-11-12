@@ -109,8 +109,9 @@
     txt($('rvNight'),'About '+money(nightly));
     txt($('rvNights'),'About '+nights);
     txt($('rvKeep'),money(r100(r[0]*(1-fee)))+' to '+money(r100(r[1]*(1-fee))));
+    txt($('rvCovT'),'What your '+Math.round(fee*100)+'% covers');
     txt($('rvKeepL'),'You’d keep on '+plan+' ('+Math.round(fee*100)+'% fee)');
-    txt($('rvRent'),rent==='Yes, long-term tenants'?'We’ll compare this with your current rent on your call.':rent==='Yes, short-term stays'?'We’ll move your current listing and reviews over.':'We’ll set up your listing, photos, and pricing.');
+    txt($('rvRent'),rent==='Yes, long-term tenants'?'We’ll compare this with your current rent on your call.':rent==='Yes, short-term stays'?'We’ll move your current listing and reviews over.':'');$('rvRent').hidden=!$('rvRent').textContent;
     /* seasonality */
     var tot=SEASON.reduce(function(a,b){return a+b},0),mx=Math.max.apply(null,SEASON),bars=$('bars');bars.textContent='';
     var top=SEASON.map(function(v,i){return [v,i]}).sort(function(a,b){return b[0]-a[0]}).slice(0,3).map(function(x){return x[1]});
@@ -217,12 +218,11 @@
       else if(!ln){err='Enter your last name.';foc='ln'}
       else if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){err='Enter a valid email address, like you@example.com.';foc='email'}
       else if(ph.length!==10){err='Enter a 10-digit phone number.';foc='ph'}
-      else if(p==='talk'&&!one('via')){err='Choose call or text.'}
       else if(p==='talk'&&!one('when')){err='Choose a good time to reach you.'}
       if(err){$('ctErr').textContent=err;if(foc)$(foc).focus();return}
       $('ctErr').textContent='';
       var w=one('when').toLowerCase(),r=range();
-      var via=one('via')==='Text me'?'text':'call',when=w==='as soon as possible'?'today':'this '+w;
+      var via='call',when=w==='as soon as possible'?'today':'this '+w;
       $('q7').textContent='You’re all set, '+fn;
       $('dn').textContent=p==='talk'?'An advisor will '+via+' you '+when+'.':'Your estimate is on its way to '+v+'.';
       $('dEst').textContent=money(r[0])+' to '+money(r[1])+' a year';

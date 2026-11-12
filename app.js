@@ -222,27 +222,24 @@
       if(err){$('ctErr').textContent=err;if(foc)$(foc).focus();return}
       $('ctErr').textContent='';
       var w=one('when').toLowerCase(),r=range();
-      $('dn').textContent=p==='talk'?
-        'Thanks, '+fn+'. An Evolve advisor will '+(one('via')==='Text me'?'text':'call')+' you '+(w==='as soon as possible'?'shortly':'in the '+w)+'. We also sent your estimate to '+v+'.':
-        'Thanks, '+fn+'. Your estimate is on its way to '+v+'. When you’re ready to talk, reply to that email or pick a time.';
+      var via=one('via')==='Text me'?'text':'call',when=w==='as soon as possible'?'today':'this '+w;
+      $('q7').textContent='You’re all set, '+fn;
+      $('dn').textContent=p==='talk'?'An advisor will '+via+' you '+when+'.':'Your estimate is on its way to '+v+'.';
+      $('dEst').textContent=money(r[0])+' to '+money(r[1])+' a year';
+      $('dAddr').textContent=addr();
+      var tg=$('dTags');tg.textContent='';
+      [ptype(),plural(s.beds,'bed','beds')+', '+plural(s.baths,'bath','baths'),one('furn'),one('rent')==='Not right now'?'Not rented yet':one('rent').replace('Yes, ','')].concat(s.plan?[s.plan+' plan']:[]).forEach(function(t){var li=document.createElement('li');li.textContent=t;tg.append(li)});
       var ns=$('nextsteps');ns.textContent='';
       (p==='talk'?[
-        ['Now','Your full estimate is in your inbox at '+v+'.'],
-        [w==='as soon as possible'?'Today':'This '+w,'Your advisor '+(one('via')==='Text me'?'texts':'calls')+' you at the number you gave. They’ll have your details, so there’s no starting over.'],
-        ['On the call','A 20-minute walkthrough of your estimate, fees, and timeline. No commitment.']
+        ['Now','Your full estimate is in your inbox.'],
+        [when.charAt(0).toUpperCase()+when.slice(1),'Your advisor '+(via==='text'?'texts':'calls')+'. They’ll already have your details.'],
+        ['On the call','20 minutes on your estimate, fees, and timeline. No commitment.']
       ]:[
-        ['Now','Your full estimate is in your inbox at '+v+'.'],
-        ['In a few days','An advisor may email to answer questions. Reply or pick a time whenever you’re ready.'],
-        ['When you’re ready','A 20-minute walkthrough of your estimate, fees, and timeline. No commitment.']
+        ['Now','Your full estimate is in your inbox.'],
+        ['In a few days','An advisor may email to answer questions.'],
+        ['When you’re ready','Reply or pick a time for a 20-minute walkthrough. No commitment.']
       ]).forEach(function(x){var li=document.createElement('li');var b=document.createElement('b');b.textContent=x[0];var sp=document.createElement('span');sp.textContent=x[1];li.append(b,sp);ns.append(li)});
-      var dl=$('recap');dl.textContent='';
-      row(dl,'Estimate',money(r[0])+' to '+money(r[1])+' a year');
-      if(s.plan)row(dl,'Plan',s.plan);
-      row(dl,'Address',addr());
-      row(dl,'Home',ptype()+', '+plural(s.beds,'bedroom','bedrooms')+', '+plural(s.baths,'bathroom','bathrooms'));
-      row(dl,'Furnished',one('furn'));
-      row(dl,'Rented out now',one('rent'));
-          }
+    }
     go(cur===2?4:cur+1);
   });
   $('skip').addEventListener('click',function(e){e.preventDefault();var m=$('main');m.focus();m.scrollIntoView()});

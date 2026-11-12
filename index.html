@@ -230,9 +230,28 @@
         <div class="field"><label for="az">ZIP code</label><input id="az" inputmode="numeric" maxlength="5" autocomplete="postal-code"></div></div>
         <div class="err" id="adErr" role="alert"></div></div>
 
-      <div class="pane" data-i="5" hidden><h2 class="q" id="q5" tabindex="-1">Here’s what your place could earn</h2>
-        <article class="lst" id="lst"></article>
-        <section class="compsec" aria-labelledby="compT"><h3 id="compT">Evolve homes like yours nearby</h3><ul class="comps" id="comps"></ul><p class="cnote">Sample photos. Real Evolve listings would appear here, and we’ll set up professional photos for your place when you’re ready.</p></section>
+      <div class="pane earn" data-i="5" hidden><h2 class="q" id="q5" tabindex="-1">Here’s what your place could earn</h2>
+        <p class="help" id="earnSub"></p>
+        <section class="reveal" aria-label="Your estimate">
+          <div class="rv-main">
+            <span class="rv-k">Estimated booking revenue</span>
+            <b class="rv-big" id="rvEst"></b>
+            <small id="rvDelta"></small>
+          </div>
+          <dl class="rv-stats">
+            <div><dt>Nightly rate</dt><dd id="rvNight"></dd></div>
+            <div><dt>Nights booked a year</dt><dd id="rvNights"></dd></div>
+            <div><dt id="rvKeepL">You’d keep</dt><dd id="rvKeep"></dd></div>
+          </dl>
+          <div class="rv-season">
+            <h3>When guests book</h3>
+            <div class="bars" id="bars" role="img"></div>
+            <p class="rv-note">Summer is your busiest season. Block the weeks you want for yourself and keep the rest open.</p>
+          </div>
+          <ul class="rv-facts"><li class="ok">Short-term rentals are allowed here with a city license. We’ll help you apply.</li><li id="rvRent"></li></ul>
+        </section>
+        <section class="compsec" aria-labelledby="compT"><h3 id="compT">How your place compares nearby</h3><ul class="comps" id="comps"></ul>
+          <p class="cnote">Sample photos and listings. Real Evolve homes nearby would appear here.</p></section>
         <button class="linkbtn" type="button" id="lstEdit">Change details</button></div>
 
       <div class="pane" data-i="6" hidden><h2 class="q" id="q6" tabindex="-1">How would you like to continue?</h2>

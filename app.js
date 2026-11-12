@@ -86,33 +86,52 @@
   })});
   function typeShort(){var t=ptype();return {'House':'house','Condo or apartment':'condo','Townhome':'townhome','Cabin':'cabin','Guest suite or ADU':'guest suite','Tiny home':'tiny home'}[t]||'home'}
   var COMPS={'Denver':['Cottage near Cheesman Park','Classic home with a picket fence','Updated bungalow off Colfax'],'Breckenridge':['Ski-area condo near Main Street','Mountain home with a hot tub','Townhome by the gondola'],'Aspen':['Mountain home near downtown','Condo by the lifts','Townhome with mountain views']};
-  var HOUSE_SVG='<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/></svg>';
+  var HOUSE_SVG='<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/></svg>';
+  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var SEASON=[.55,.6,.72,.7,.88,1.2,1.35,1.28,1.0,.85,.62,.85]; /* illustrative Denver demand curve */
+  var OCC=.62;
+  function txt(el,t){el.textContent=t;return el}
+  function mk(tag,cls,t){var e=document.createElement(tag);if(cls)e.className=cls;if(t!=null)e.textContent=t;return e}
   function listing(){
-    var r=range(),furn=one('furn'),rent=one('rent'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
-    var el=$('lst');el.textContent='';
-    var b=document.createElement('div');b.className='lbody';
-    var h=document.createElement('h3');h.textContent=s.beds+'-bedroom '+typeShort()+' in '+h0;
-    var meta=document.createElement('p');meta.className='lmeta';meta.textContent=(exact?addr():'')+'';
-    var est=document.createElement('div');est.className='lest';est.innerHTML='<span>Estimated booking revenue</span><b></b><small></small>';
-    est.querySelector('b').textContent=money(r[0])+' to '+money(r[1])+' a year';
-    est.querySelector('small').textContent='Based on your address and similar homes Evolve manages nearby'+(furn==='Not yet'?', once your place is furnished':'')+'.';
-    var ul=document.createElement('ul');ul.className='lfacts';
-    [['ok','Short-term rentals are allowed here with a city license. We’ll help you apply.'],['',rent==='Yes, long-term tenants'?'You’ll see a short-term vs. long-term comparison on your call.':rent==='Yes, short-term stays'?'We’ll bring your current listing and reviews with you.':'We’ll set up your listing, photos, and pricing.']].forEach(function(x){var li=document.createElement('li');if(x[0])li.className=x[0];li.textContent=x[1];ul.append(li)});
-    b.append(h,meta,est,ul);el.append(b);
-    /* comparable Evolve homes */
+    var r=range(),rent=one('rent'),furn=one('furn'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
+    var mid=(r[0]+r[1])/2,nights=Math.round(365*OCC),nightly=Math.round(mid/nights/5)*5;
+    var fee=s.plan==='Plus'?.15:.10,plan=s.plan==='Plus'?'Plus':'Core';
+    var w=TYPEW[ptype()]||1,rlo=r100(s.lo*w),rhi=r100(s.hi*w);
+    txt($('earnSub'),s.beds+'-bedroom '+typeShort()+' at '+(exact?exact.street:h0));
+    $('rvEst').innerHTML='';$('rvEst').append(money(r[0])+' to '+money(r[1]),mk('span',null,' a year'));
+    txt($('rvDelta'),'Narrowed from your first estimate of '+money(rlo)+' to '+money(rhi)+'.'+(furn==='Not yet'?' Assumes your place is furnished.':''));
+    txt($('rvNight'),'About '+money(nightly));
+    txt($('rvNights'),'About '+nights);
+    txt($('rvKeep'),money(r100(r[0]*(1-fee)))+' to '+money(r100(r[1]*(1-fee))));
+    txt($('rvKeepL'),'You’d keep on '+plan+' ('+Math.round(fee*100)+'% fee)');
+    txt($('rvRent'),rent==='Yes, long-term tenants'?'We’ll compare this with your current rent on your call.':rent==='Yes, short-term stays'?'We’ll move your current listing and reviews over.':'We’ll set up your listing, photos, and pricing.');
+    /* seasonality */
+    var tot=SEASON.reduce(function(a,b){return a+b},0),mx=Math.max.apply(null,SEASON),bars=$('bars');bars.textContent='';
+    var top=SEASON.map(function(v,i){return [v,i]}).sort(function(a,b){return b[0]-a[0]}).slice(0,3).map(function(x){return x[1]});
+    SEASON.forEach(function(v,i){
+      var amt=money(r100(mid*v/tot)),col=mk('div','bar'+(top.indexOf(i)>-1?' peak':''));
+      var m=mk('i');m.style.height=Math.round(v/mx*100)+'%';
+      var tip=mk('span','tip',MONTHS[i]+' · about '+amt);
+      col.append(m,mk('b',null,MONTHS[i][0]),tip);col.tabIndex=0;col.setAttribute('aria-label',MONTHS[i]+', about '+amt);
+      bars.append(col);
+    });
+    bars.setAttribute('aria-label','Estimated earnings by month. Busiest in '+top.slice().sort(function(a,b){return a-b}).map(function(i){return MONTHS[i]}).join(', ')+'.');
+    /* how you compare */
     var names=COMPS[city]||['Home near downtown','Quiet home with a yard','Updated home near shops'];
-    var mid=(r[0]+r[1])/2,cs=$('comps');cs.textContent='';
-    $('compT').textContent='Evolve homes like yours near '+area;
+    var cs=$('comps');cs.textContent='';
+    txt($('compT'),'How your place compares near '+area);
+    var me=mk('li','comp mine');
+    var ph=mk('div','cph');ph.innerHTML=HOUSE_SVG;ph.append(mk('span',null,'Your place'));
+    var bd=mk('div','cbd');bd.append(mk('b',null,'Your '+typeShort()),mk('span','cm',plural(s.beds,'bedroom','bedrooms')+' · about '+money(nightly)+' a night'),mk('span','cr','Estimated'));
+    me.append(ph,bd);cs.append(me);
+    var hero=document.querySelector('.hero .bg').getAttribute('src');
     names.forEach(function(n,k){
-      var bd=Math.max(1,s.beds+[0,-1,1][k]),nt=Math.round(mid*(bd/s.beds)/(365*.62)/5)*5,rt=['4.9','4.8','4.9'][k],rv=[62,38,114][k];
-      var c=document.createElement('li');c.className='comp';
-      c.innerHTML='<div class="cph"><img alt=""></div><div class="cbd"><b></b><span class="cm"></span><span class="cr"></span></div>';
-      var ci=c.querySelector('img'),hero=document.querySelector('.hero .bg').getAttribute('src'),tp=document.querySelectorAll('.tphoto');
-      ci.src=['images/comp-cottage.jpg','images/comp-picket-fence.jpg',hero][k];ci.style.objectPosition=['50% 50%','50% 50%','22% 50%'][k];
-      c.querySelector('b').textContent=n;
-      c.querySelector('.cm').textContent=plural(bd,'bedroom','bedrooms')+' · about '+money(nt)+' a night';
-      c.querySelector('.cr').textContent='★ '+rt+' ('+rv+' reviews)';
-      cs.append(c);
+      var b2=Math.max(1,s.beds+[0,-1,1][k]),nt=Math.round(mid*(b2/s.beds)/nights/5)*5;
+      var c=mk('li','comp'),p2=mk('div','cph'),im=mk('img');im.alt='';
+      im.src=['images/comp-cottage.jpg','images/comp-picket-fence.jpg',hero][k];im.style.objectPosition=['50% 50%','50% 50%','22% 50%'][k];
+      p2.append(im);
+      var c2=mk('div','cbd');c2.append(mk('b',null,n),mk('span','cm',plural(b2,'bedroom','bedrooms')+' · about '+money(nt)+' a night'),mk('span','cr','★ '+['4.9','4.8','4.9'][k]+' ('+[62,38,114][k]+' reviews)'));
+      c.append(p2,c2);cs.append(c);
     });
   }
   function go(n){
@@ -128,6 +147,7 @@
     });
     $('strip').hidden=true;
     if(n===5)listing();
+    wiz.classList.toggle('wide',n===5);
     $('wzFoot').hidden=n>=7;
     $('wzBack').textContent=n===0?'Not now':'Back';
     var nx=$('wzNext'),p=one('path');

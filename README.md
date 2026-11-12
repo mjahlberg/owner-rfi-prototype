@@ -19,7 +19,7 @@ So this flow keeps owners anonymous until they've gotten something back, then ma
 3. **Where you're starting from.** Furnished or not, and whether it's rented out now. Both are one tap.
 4. **Your address.** Framed as a way to sharpen the estimate, with a plain promise that it's only used for the estimate.
 5. **What your place could earn.** The sharper estimate, a local rules check, and similar Evolve homes nearby that explain where the number comes from.
-6. **You choose what's next.** Talk with someone (phone, call or text, a good time) or just get the estimate by email (phone optional). Sales can see which owners are ready.
+6. **You choose what's next.** Talk with someone (call or text, at a good time) or get the estimate by email first. Both paths collect the same details, and sales can see which owners are ready.
 
 Owners whose property isn't a fit get a kind exit with an option to hear if that changes.
 
@@ -28,7 +28,7 @@ Owners whose property isn't a fit get a kind exit with an option to hear if that
 - The 35% and 30% drop-offs are shares of everyone who starts. Together they make up about 65%, which matches "two in three don't finish."
 - Ineligible property types come from Evolve's public eligibility page. Shared rooms, timeshares, RVs, and mobile homes are routed to the kind exit.
 - First and last name stay separate, matching what Evolve asks today.
-- Owners who choose "email me my estimate" are nurture leads. Phone is optional for them, so sales may follow up by email first.
+- Every completed lead includes name, email, and phone, as the brief requires. Owners who choose "email me my estimate" get their estimate by email first, and sales can see they prefer a slower start.
 - Estimates, the rules check, comparable homes, neighborhood names, and photos are mocked for the prototype. Try ZIP 80206 or 80218 to see Denver neighborhood names.
 
 ## What's here

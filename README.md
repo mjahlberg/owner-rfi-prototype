@@ -17,7 +17,7 @@ So this flow keeps owners anonymous until they've gotten something back, then ma
 1. **Estimate first.** Bedrooms, bathrooms, and ZIP on the landing page give a rough yearly range before anything personal is asked.
 2. **Your place.** Property type and whether guests get the entire place. These check eligibility early, so owners Evolve can't help find out before sharing anything.
 3. **Where you're starting from.** Furnished or not, and whether it's rented out now. Both are one tap.
-4. **Your address.** Framed as a way to sharpen the estimate, with a plain promise that it's only used for the estimate.
+4. **Your address.** Framed as the way to get an exact estimate for their home.
 5. **What your place could earn.** The sharper estimate, a local rules check, and similar Evolve homes nearby that explain where the number comes from.
 6. **You choose what's next.** Talk with someone (call or text, at a good time) or get the estimate by email first. Both paths collect the same details, and sales can see which owners are ready.
 

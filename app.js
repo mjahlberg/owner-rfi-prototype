@@ -159,7 +159,7 @@
     $('wzFoot').hidden=n>=7;
     $('wzBack').textContent='Back';
     var nx=$('wzNext'),p=one('path');
-    nx.textContent=n===0?'Get started':n===4?'Sharpen my estimate':n===5?'Continue':n===6?(p==='talk'?'Request a conversation':p==='email'?'Send my estimate':'Continue'):'Next';
+    nx.textContent=n===0?'Get started':n===4?'See my exact estimate':n===5?'Continue':n===6?(p==='talk'?'Request a conversation':p==='email'?'Send my estimate':'Continue'):'Next';
     nx.classList.add('ink');
     wiz.classList.toggle('ov',n===0);
     $('wzMain').scrollTop=0;$('q'+n).focus();

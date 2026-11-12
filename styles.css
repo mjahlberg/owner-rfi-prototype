@@ -350,3 +350,8 @@ fieldset.space{margin-top:22px}
 @media (min-width:761px){.wiz.wide .wz-row{max-width:860px}}
 .earn .reveal{padding:22px 24px}
 @media (max-width:760px){.earn .reveal{padding:18px}}
+
+/* starting-from tiles and up-next note */
+.upnext{margin-top:22px;padding:12px 14px;border-radius:10px;background:var(--alt);color:var(--ink);font-size:.96rem;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.upnext strong{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+@media (max-width:560px){.pane[data-i="2"] .chips.tiles{grid-template-columns:1fr;gap:8px}.pane[data-i="2"] .tiles .chip span{min-height:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;padding:12px 14px}}

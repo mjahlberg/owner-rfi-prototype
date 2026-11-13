@@ -99,23 +99,31 @@
   /* Turn a few words into a listing-style line. Short keyword input gets
      rewritten; anything longer is only tidied, so the owner's words stay theirs.
      In production this would be a language model, not a keyword list. */
-  var POLISH=[[/\bski|slopes?\b/i,'close to the ski slopes'],[/\bdowntown|town|main st/i,'short walk to town'],[/\blake/i,'steps from the lake'],
+  var POLISH=[[/\bski|slopes?\b/i,'close to the ski slopes'],[/\bdowntown|town|main st/i,'a short walk to town'],[/\blake/i,'steps from the lake'],
     [/\bbeach|ocean|coast/i,'near the beach'],[/\bmountains?|views?\b/i,'mountain views'],[/\bhot ?tub|jacuzzi|spa\b/i,'hot tub'],
     [/\bfire ?place|wood ?stove/i,'cozy fireplace'],[/\bporch|deck|patio/i,'sunny porch'],[/\bfruit trees?/i,'fruit trees'],
     [/\byard|garden/i,'big yard'],[/\bbuilt in (\d{4})/i,'built in $1'],[/\bhistoric|victorian|old\b/i,'historic charm'],
     [/\bquiet|peaceful/i,'quiet street'],[/\bpool\b/i,'pool'],[/\bwalkable|walk\b/i,'walkable to everything'],
     [/\bupdated|remodel|renovat|modern/i,'freshly updated'],[/\bpets?|dogs?\b/i,'pet friendly'],[/\bpark\b/i,'near the park']];
   function polish(t){
-    t=(t||'').replace(/\s+/g,' ').trim().replace(/[.]+$/,'');if(!t)return '';
+    t=(t||'').replace(/\s+/g,' ').trim().replace(/[.!]+$/,'');if(!t)return '';
     var cap=function(x){return x.charAt(0).toUpperCase()+x.slice(1)};
-    if(/,/.test(t)||t.split(' ').length>=6)return cap(t);
-    var hits=[];POLISH.forEach(function(p){var m=t.match(p[0]);if(m){var ph=p[1].replace('$1',m[1]||'');if(!hits.some(function(h){return h[1]===ph}))hits.push([m.index,ph])}});
-    if(!hits.length)return cap(t);
-    hits.sort(function(a,b){return a[0]-b[0]});var l=hits.map(function(x){return x[1]}).slice(0,3);
-    return cap(l.length<3?l.join(', '):l[0]+', '+l[1]+', and '+l[2]);
+    var low=function(x){return /^[A-Z][a-z]/.test(x)&&!/^(I|I'm)\b/.test(x)?x.charAt(0).toLowerCase()+x.slice(1):x};
+    var parts=t.split(/\s*(?:,|;|&|\band\b|\bwith\b|\bplus\b)\s*/i).map(function(p){return low(p.trim())}).filter(Boolean);
+    /* short keyword-only input, like "ski slopes town", becomes phrases */
+    if(parts.length===1&&parts[0].split(' ').length<=4){
+      var hits=[];POLISH.forEach(function(p){var m=t.match(p[0]);if(m){var ph=p[1].replace('$1',m[1]||'');if(!hits.some(function(h){return h[1]===ph}))hits.push([m.index,ph])}});
+      if(hits.length>=2)parts=hits.sort(function(x,y){return x[0]-y[0]}).map(function(x){return x[1]});
+    }
+    var REL=/^(close|near|steps|a short walk|short walk|walk|walkable|minutes?|blocks?|one|two|three|built|across|on|in|by|next|right|just|a block|a few)\b/i;
+    var nouns=[],rels=[];parts.slice(0,4).forEach(function(p){(REL.test(p)?rels:nouns).push(p)});
+    var plural=function(p){var w=p.split(' ').pop();return /s$/.test(w)&&!/ss$/.test(w)||/^lots? of\b/.test(p)};
+    var art=function(p){return plural(p)||/^(a|an|the|my|our)\b/i.test(p)?'':(/^[aeiou]/i.test(p)?'an ':'a ')};
+    var out='';
+    if(nouns.length){out=art(nouns[0])+nouns[0];if(nouns.length>1)out+=' with '+nouns.slice(1).map(function(p){return art(p)+p}).join(' and ')}
+    if(rels.length)out+=(out?', ':'')+rels.join(' and ');
+    return cap(out);
   }
-  var COVERS={Core:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>','Professional photos','Plus a listing written for your home'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>','Listed on every major site','Airbnb, Vrbo, Booking.com, and more'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','Damage protection','Up to $5,000, plus $1M liability insurance']],
-    Plus:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>','A performance advisor','Reviews and tunes your listing'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 10 11l4 4 6-7"/><path d="M15 8h5v5"/></svg>','More listing exposure','Higher placement where guests search'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','More damage protection','Up to $10,000, plus $1M liability insurance']]};
   function listing(){
     var r=range(),furn=one('furn'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
     var mid=(r[0]+r[1])/2,nights=Math.round(365*OCC),nightly=Math.round(mid/nights/5)*5;

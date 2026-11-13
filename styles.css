@@ -469,3 +469,33 @@ footer.site .flogo{filter:none}
 .mine-quote{margin:2px 0 0;font:600 1.15rem/1.4 var(--font-d);color:var(--accent)}
 .ddesc{font-style:italic;color:var(--ink);font-size:.98rem}
 #v1 .zrow input{text-align:left}
+
+/* reveal, stacked */
+.earn-sub{margin:4px 0 0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:1.05rem}
+.earn-sub .linkbtn.edit{min-height:0;padding:2px 0;font-size:1rem}
+.earn .reveal{display:block}
+.earn .rv-main{gap:6px}
+.earn .rv-stats{margin:20px 0 0;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 48px}
+.earn .rv-stats div{display:flex;flex-direction:column;gap:2px;border:0;padding:0}
+.earn .rv-stats dd{font:800 1.15rem/1.2 var(--font-d);color:var(--ink);text-align:left}
+.earn .rv-stats dt{font-size:.9rem;color:var(--muted)}
+.earn .rv-covers{margin-top:24px;padding-top:20px}
+.earn .rv-covers ul{grid-template-columns:repeat(3,1fr);gap:24px}
+/* comparison cards */
+.earn .compsec{margin-top:48px}
+.earn .compsec h3{font-size:1.15rem;margin-bottom:16px}
+.earn .comps{margin:0;grid-template-columns:repeat(3,1fr);gap:16px}
+.earn .comp{border:0;border-radius:0;background:none;overflow:visible}
+.earn .cph{aspect-ratio:4/3;border-radius:14px;overflow:hidden}
+.earn .comp.mine{border:0}
+.earn .comp.mine .cph{border:2px solid var(--ink);background:#e8f3f5}
+.earn .cbd{padding:12px 2px 0;gap:3px}
+.earn .ctop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.earn .ct{font-size:1rem;color:var(--ink)}
+.earn .cr{font-size:.9rem;color:var(--ink);white-space:nowrap}
+.earn .ctag{font-size:.78rem;font-weight:600;color:var(--accent);white-space:nowrap}
+.earn .cf{font-size:.92rem;color:var(--muted);line-height:1.4}
+.earn .cm{font-size:.92rem;color:var(--muted)}
+.earn .cp{margin-top:4px;font-size:.95rem;font-weight:700;color:var(--ink)}
+@media (max-width:760px){.earn .rv-stats{grid-template-columns:1fr 1fr;gap:16px 24px}.earn .rv-covers ul{grid-template-columns:1fr}}
+@media (max-width:560px){.earn .comps{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory}}

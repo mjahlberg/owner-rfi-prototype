@@ -93,36 +93,42 @@
   var OCC=.62;
   function txt(el,t){el.textContent=t;return el}
   function mk(tag,cls,t){var e=document.createElement(tag);if(cls)e.className=cls;if(t!=null)e.textContent=t;return e}
+  var COMPDATA={'Denver':[
+      {img:'images/comp-cottage.jpg',pos:'50% 50%',area:'Congress Park',fun:'Flower boxes on a quiet street near Cheesman Park',bd:0,ba:0,rt:'4.92',rv:62},
+      {img:'images/comp-picket-fence.jpg',pos:'50% 50%',area:'Cheesman Park',fun:'Picket fence, big trees, and a short walk to Colfax',bd:-1,ba:-1,rt:'4.87',rv:38}]};
   function listing(){
-    var r=range(),rent=one('rent'),furn=one('furn'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
+    var r=range(),furn=one('furn'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
     var mid=(r[0]+r[1])/2,nights=Math.round(365*OCC),nightly=Math.round(mid/nights/5)*5;
     var fee=s.plan==='Plus'?.15:.10,plan=s.plan==='Plus'?'Plus':'Core';
     var w=TYPEW[ptype()]||1,rlo=r100(s.lo*w),rhi=r100(s.hi*w);
-    txt($('earnSub'),s.beds+'-bedroom '+typeShort()+' at '+(exact?exact.street:h0));
-    var d=$('desc').value.trim().replace(/[.]+$/,'');$('earnDesc').hidden=!d;if(d)txt($('earnDesc'),'“'+d.charAt(0).toUpperCase()+d.slice(1)+'”');
+    var T=typeShort(),Tc=T.charAt(0).toUpperCase()+T.slice(1);
+    txt($('earnSub'),s.beds+'-bedroom '+T+' at '+(exact?exact.street:h0));
     $('rvEst').innerHTML='';$('rvEst').append(money(r[0])+' to '+money(r[1]),mk('span',null,' a year'));
     txt($('rvDelta'),'Narrowed from your first estimate of '+money(rlo)+' to '+money(rhi)+'.'+(furn==='Not yet'?' Assumes your place is furnished.':''));
     txt($('rvNight'),'About '+money(nightly));
     txt($('rvNights'),'About '+nights);
-    txt($('rvKeep'),money(r100(r[0]*(1-fee)))+' to '+money(r100(r[1]*(1-fee))));
+    txt($('rvKeep'),money(r100(r[0]*(1-fee)))+'–'+money(r100(r[1]*(1-fee))));
+    txt($('rvKeepL'),'you’d keep on '+plan+' ('+Math.round(fee*100)+'% fee)');
     txt($('rvCovT'),'What your '+Math.round(fee*100)+'% covers');
-    txt($('rvKeepL'),'You’d keep on '+plan+' ('+Math.round(fee*100)+'% fee)');
-    /* how you compare */
-    var names=COMPS[city]||['Home near downtown','Quiet home with a yard','Updated home near shops'];
+    /* how you compare: the owner's place beside two Evolve homes */
     var cs=$('comps');cs.textContent='';
     txt($('compT'),'How your place compares near '+area);
-    var me=mk('li','comp mine');
-    var ph=mk('div','cph');ph.innerHTML=HOUSE_SVG;ph.append(mk('span',null,'Your place'));
-    var bd=mk('div','cbd');bd.append(mk('b',null,'Your '+typeShort()),mk('span','cm',plural(s.beds,'bedroom','bedrooms')+' · about '+money(nightly)+' a night'),mk('span','cr','Estimated'));
-    me.append(ph,bd);cs.append(me);
-    var hero=document.querySelector('.hero .bg').getAttribute('src');
-    names.forEach(function(n,k){
-      var b2=Math.max(1,s.beds+[0,-1,1][k]),nt=Math.round(mid*(b2/s.beds)/nights/5)*5;
-      var c=mk('li','comp'),p2=mk('div','cph'),im=mk('img');im.alt='';
-      im.src=['images/comp-cottage.jpg','images/comp-picket-fence.jpg',hero][k];im.style.objectPosition=['50% 50%','50% 50%','22% 50%'][k];
-      p2.append(im);
-      var c2=mk('div','cbd');c2.append(mk('b',null,n),mk('span','cm',plural(b2,'bedroom','bedrooms')+' · about '+money(nt)+' a night'),mk('span','cr','★ '+['4.9','4.8','4.9'][k]+' ('+[62,38,114][k]+' reviews)'));
-      c.append(p2,c2);cs.append(c);
+    function card(cls,photo,title,right,fun,meta,price){
+      var c=mk('li','comp'+(cls?' '+cls:''));c.append(photo);
+      var bd=mk('div','cbd'),top=mk('div','ctop');top.append(mk('b','ct',title),right);
+      bd.append(top);if(fun)bd.append(mk('span','cf',fun));bd.append(mk('span','cm',meta),mk('span','cp',price));
+      c.append(bd);cs.append(c);
+    }
+    var mp=mk('div','cph');mp.innerHTML=HOUSE_SVG;mp.append(mk('span',null,'Your place'));
+    var d=$('desc').value.trim().replace(/[.]+$/,'');
+    card('mine',mp,Tc+' in '+area,mk('span','ctag','Estimated'),d?d.charAt(0).toUpperCase()+d.slice(1):'',plural(s.beds,'bedroom','bedrooms')+' · '+plural(s.baths,'bath','baths'),'About '+money(nightly)+' a night');
+    var list=COMPDATA[city]||[
+      {img:'images/comp-cottage.jpg',pos:'50% 50%',area:area,fun:'Quiet street close to shops and parks',bd:0,ba:0,rt:'4.9',rv:54},
+      {img:'images/comp-picket-fence.jpg',pos:'50% 50%',area:area,fun:'Big yard and room for the whole family',bd:-1,ba:-1,rt:'4.8',rv:31}];
+    list.forEach(function(x){
+      var b2=Math.max(1,s.beds+x.bd),b3=Math.max(1,s.baths+x.ba),nt=Math.round(mid*(b2/s.beds)/nights/5)*5;
+      var p2=mk('div','cph'),im=mk('img');im.alt='';im.src=x.img;im.style.objectPosition=x.pos;p2.append(im);
+      card('',p2,'House in '+x.area,mk('span','cr','★ '+x.rt+' ('+x.rv+')'),x.fun,plural(b2,'bedroom','bedrooms')+' · '+plural(b3,'bath','baths'),'About '+money(nt)+' a night');
     });
   }
   function go(n){

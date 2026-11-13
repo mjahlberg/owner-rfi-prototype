@@ -430,3 +430,4 @@ footer.site a:focus-visible{outline-color:#fff}
 footer.site .flogo{filter:none}
 .fcols nav{display:block}
 .fcols nav a{display:inline;padding:0;min-height:0;font-weight:400;border-radius:0}
+@media (min-width:961px){.tcar{padding:0}.tprev{left:-26px}}

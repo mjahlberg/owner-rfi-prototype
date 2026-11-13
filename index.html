@@ -217,7 +217,7 @@
 
       <div class="pane" data-i="2" hidden><h2 class="q" id="q2" tabindex="-1">Where are you starting from?</h2>
         <fieldset><legend>Is it furnished?</legend><div class="chips tiles" data-name="furn" data-type="radio" data-opts="Fully furnished|Partly furnished|Not yet"></div></fieldset>
-        <fieldset><legend>Is it rented out right now?</legend><div class="chips tiles" data-name="rent" data-type="radio" data-opts="Not right now|Yes, short-term stays|Yes, long-term tenants"></div></fieldset>
+        <fieldset><legend>Is it rented out right now?</legend><div class="chips tiles" data-name="rent" data-type="radio" data-opts="Yes, short-term stays|Yes, long-term tenants|Not right now"></div></fieldset>
         <div class="err" id="stErr" role="alert"></div></div>
 
       <div class="pane" data-i="4" hidden><h2 class="q" id="q4" tabindex="-1">Get your exact estimate</h2>
@@ -235,16 +235,19 @@
             <b class="rv-big" id="rvEst"></b>
             <small id="rvDelta"></small>
           </div>
-          <div class="keepweeks">
-            <div class="kw-top"><label for="kw">Weeks you keep for yourself</label><output id="kwOut" for="kw">0 weeks</output></div>
-            <input type="range" id="kw" min="0" max="12" step="1" value="0">
-          </div>
           <dl class="rv-stats">
             <div><dt>Average nightly price</dt><dd id="rvNight"></dd></div>
             <div><dt>Average nights booked a year</dt><dd id="rvNights"></dd></div>
             <div><dt id="rvKeepL">Amount you keep after Core</dt><dd id="rvKeep"></dd></div>
           </dl>
-          <div class="rv-covers"><h3 id="rvCovT">What your 10% covers</h3><ul><li><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg><b>Professional photos</b><span>and a listing written for your home</span></li><li><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg><b>Listed everywhere guests book</b><span>Airbnb, Vrbo, Booking.com, and more</span></li><li><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg><b>Damage protection</b><span>up to $5,000, plus $1M liability insurance</span></li></ul></div>
+          <div class="keepweeks">
+            <label for="kw">Weeks you keep for yourself</label>
+            <input type="range" id="kw" min="0" max="12" step="1" value="0">
+            <output id="kwOut" for="kw">None</output>
+          </div>
+          <div class="rv-covers"><div class="cov-head"><h3 id="rvCovT">What your 10% covers</h3>
+            <div class="plantog" role="radiogroup" aria-label="Compare plans"><button type="button" role="radio" data-p="Core">Core 10%</button><button type="button" role="radio" data-p="Plus">Plus 15%</button></div></div>
+            <ul id="rvCovList"></ul></div>
         </section>
         <section class="compsec" aria-labelledby="compT"><h3 id="compT">How your place compares nearby</h3><ul class="comps" id="comps"></ul></section>
       </div>

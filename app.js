@@ -114,10 +114,12 @@
     hits.sort(function(a,b){return a[0]-b[0]});var l=hits.map(function(x){return x[1]}).slice(0,3);
     return cap(l.length<3?l.join(', '):l[0]+', '+l[1]+', and '+l[2]);
   }
+  var COVERS={Core:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>','Professional photos','and a listing written for your home'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>','Listed everywhere guests book','Airbnb, Vrbo, Booking.com, and more'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','Damage protection','up to $5,000, plus $1M liability insurance']],
+    Plus:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>','A dedicated advisor','who reviews and tunes your listing'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 10 11l4 4 6-7"/><path d="M15 8h5v5"/></svg>','More listing exposure','higher placement where guests search'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','More damage protection','up to $10,000, plus $1M liability insurance']]};
   function listing(){
     var r=range(),furn=one('furn'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
     var mid=(r[0]+r[1])/2,nights=Math.round(365*OCC),nightly=Math.round(mid/nights/5)*5;
-    var fee=s.plan==='Plus'?.15:.10,plan=s.plan==='Plus'?'Plus':'Core';
+    var plan=s.plan==='Plus'?'Plus':'Core',fee=plan==='Plus'?.15:.10;
     var w=TYPEW[ptype()]||1,rlo=r100(s.lo*w),rhi=r100(s.hi*w);
     var T=typeShort(),Tc=T.charAt(0).toUpperCase()+T.slice(1);
     txt($('earnSub'),s.beds+'-bedroom '+T+' at '+(exact?exact.street:h0));
@@ -136,8 +138,17 @@
       s.keepWeeks=wk;
     }
     $('kw').oninput=kwUpdate;kwUpdate();
-    txt($('rvKeepL'),'Amount you keep after '+plan);
-    txt($('rvCovT'),'What your '+Math.round(fee*100)+'% covers');
+    function planSet(p){
+      plan=p;fee=p==='Plus'?.15:.10;s.plan=p;
+      txt($('rvCovT'),'What your '+Math.round(fee*100)+'% covers');
+      txt($('rvKeepL'),'Amount you keep after '+p);
+      document.querySelectorAll('.plantog button').forEach(function(bt){bt.setAttribute('aria-checked',bt.dataset.p===p?'true':'false')});
+      var ul=$('rvCovList');ul.textContent='';
+      COVERS[p].forEach(function(c){var li=document.createElement('li');li.innerHTML=c[0];li.append(mk('b',null,c[1]),mk('span',null,c[2]));ul.append(li)});
+      kwUpdate();
+    }
+    document.querySelectorAll('.plantog button').forEach(function(bt){bt.onclick=function(){planSet(bt.dataset.p)}});
+    planSet(plan);
     /* how you compare: the owner's place beside two Evolve homes */
     var cs=$('comps');cs.textContent='';
     txt($('compT'),'How your place compares near '+area);
@@ -147,7 +158,8 @@
       bd.append(top);if(fun)bd.append(mk('span','cf',fun));bd.append(mk('span','cm',meta),mk('span','cp',price));
       c.append(bd);cs.append(c);
     }
-    var mp=mk('div','cph');mp.innerHTML=HOUSE_SVG;mp.append(mk('span',null,'Your place'));
+    var mp=mk('div','cph'),mi=mk('img');mi.alt='';mi.src='images/story-stone-home.jpg';mp.append(mi);
+    var yp=mk('div','yp');yp.innerHTML=HOUSE_SVG;yp.append(mk('span',null,'Your place'),mk('small',null,'Photos when you’re ready'));mp.append(yp);
     var d=polish($('desc').value);
     card('mine',mp,Tc+' in '+area,mk('span','ctag','Estimated'),d?d.charAt(0).toUpperCase()+d.slice(1):'',plural(s.beds,'bedroom','bedrooms')+' · '+plural(s.baths,'bath','baths'),'About '+money(nightly)+' a night');
     var list=COMPDATA[city]||[

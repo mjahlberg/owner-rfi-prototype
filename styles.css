@@ -557,3 +557,22 @@ footer.site .flogo{filter:none}
 .earn .comp{display:flex;flex-direction:column}
 .earn .cbd{flex:1;display:flex;flex-direction:column}
 .earn .cp{margin-top:auto;padding-top:6px}
+
+/* compact weeks slider, one row under the stats */
+.earn .keepweeks{margin-top:18px;padding:0;background:none;border-radius:0;display:grid;grid-template-columns:auto minmax(120px,1fr) 4.5em;align-items:center;gap:16px}
+.earn .keepweeks label{font-weight:600;color:var(--ink);font-size:.95rem}
+.earn .keepweeks output{font:700 .95rem var(--font-b);color:var(--ink);text-align:right;white-space:nowrap}
+.earn #kw{margin:0}
+@media (max-width:560px){.earn .keepweeks{grid-template-columns:1fr auto;gap:6px 12px}.earn #kw{grid-column:1/-1;grid-row:2}}
+/* plan toggle */
+.cov-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.plantog{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.plantog button{border:0;background:none;border-radius:999px;padding:6px 14px;min-height:34px;font:600 .9rem var(--font-b);color:var(--muted);cursor:pointer}
+.plantog button[aria-checked="true"]{background:var(--ink);color:#fff}
+.plantog button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.earn .rv-covers ul{margin-top:12px}
+/* "your place" card gets a faded photo */
+.earn .comp.mine .cph{position:relative;border:2px dashed var(--field);background:#fff}
+.earn .comp.mine .cph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;filter:grayscale(.6)}
+.earn .comp.mine .cph .yp{position:relative;display:grid;justify-items:center;gap:4px;color:var(--ink);font-weight:700;text-align:center;background:rgba(255,255,255,.88);padding:10px 14px;border-radius:10px}
+.earn .comp.mine .cph .yp small{font-weight:400;font-size:.82rem;color:var(--muted)}

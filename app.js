@@ -118,7 +118,8 @@
     var REL=/^(close|near|steps|a short walk|short walk|walk|walkable|minutes?|blocks?|one|two|three|built|across|on|in|by|next|right|just|a block|a few)\b/i;
     var nouns=[],rels=[];parts.slice(0,4).forEach(function(p){(REL.test(p)?rels:nouns).push(p)});
     var plural=function(p){var w=p.split(' ').pop();return /s$/.test(w)&&!/ss$/.test(w)||/^lots? of\b/.test(p)};
-    var art=function(p){return plural(p)||/^(a|an|the|my|our)\b/i.test(p)?'':(/^[aeiou]/i.test(p)?'an ':'a ')};
+    var mass=/\b(furniture|parking|storage|wifi|wi-fi|light|privacy|seating|space|landscaping|decor|charm|character|history|shade)$/i;
+    var art=function(p){return plural(p)||mass.test(p)||/^(a|an|the|my|our)\b/i.test(p)?'':(/^[aeiou]/i.test(p)?'an ':'a ')};
     var out='';
     if(nouns.length){out=art(nouns[0])+nouns[0];if(nouns.length>1)out+=' with '+nouns.slice(1).map(function(p){return art(p)+p}).join(' and ')}
     if(rels.length)out+=(out?', ':'')+rels.join(' and ');

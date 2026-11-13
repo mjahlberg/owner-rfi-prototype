@@ -457,3 +457,6 @@ footer.site .flogo{filter:none}
 #v1 #zipErr{text-align:right}
 #v1 .btn{margin-top:20px}
 #v1 #zipHelp,#v1 #zipErr{text-align:left}
+#v2 #res{background:var(--alt);padding:16px 18px;border-radius:14px;margin-top:12px}
+#v2 .v2next{border-top:0;padding-top:0}
+#v2 .next-note b{font-size:1.1rem}

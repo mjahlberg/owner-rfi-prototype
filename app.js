@@ -231,3 +231,6 @@
   td.forEach(function(d,k){d.onclick=function(){tgo(k)}});
   lab();
 })();
+
+/* footer links are placeholders */
+document.querySelectorAll('footer.site a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault()})});

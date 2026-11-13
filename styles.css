@@ -402,3 +402,31 @@ fieldset.space{margin-top:22px}
 .rv-covers span{color:var(--muted);font-size:.88rem;line-height:1.4}
 @media (max-width:760px){.rv-covers ul{grid-template-columns:1fr 1fr}}
 .pane.earn .q{max-width:none}
+
+/* landing polish */
+#ctl,#hw{max-width:none}
+.panel h3{margin-bottom:14px}
+.panel ul{list-style:disc;padding-left:1.25em}
+.panel li{border-top:0;padding:5px 0}
+.panel li::marker{color:var(--accent)}
+#faq details{max-width:560px}
+#faq summary::after{content:"";top:50%;right:10px;width:10px;height:10px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:translateY(-70%) rotate(45deg);transition:transform .15s}
+#faq details[open] summary::after{content:"";transform:translateY(-30%) rotate(-135deg)}
+.close{padding-top:24px}
+.closecard{background:var(--alt);border-radius:20px;padding:56px 24px;text-align:center}
+.closecard h2{max-width:none;margin:0 auto}
+@media (max-width:960px){#faq details{max-width:none}.closecard{padding:40px 20px}}
+/* site footer */
+footer.site{background:#1b3e46;color:#fff;padding:56px 0 40px;font-size:1rem}
+footer.site .flogo{height:32px;width:auto;filter:brightness(0) invert(1)}
+.fcols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:36px}
+.fcols h2{font:700 .9rem/1.3 var(--font-d);letter-spacing:.1em;text-transform:uppercase;color:#fff;max-width:none}
+.fcols ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+footer.site a{color:#fff;text-decoration:none}
+footer.site a:hover{text-decoration:underline}
+footer.site a:focus-visible{outline-color:#fff}
+.fbase{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);display:flex;flex-wrap:wrap;gap:12px 28px;font-size:.92rem}
+@media (max-width:760px){.fcols{grid-template-columns:1fr 1fr}}
+footer.site .flogo{filter:none}
+.fcols nav{display:block}
+.fcols nav a{display:inline;padding:0;min-height:0;font-weight:400;border-radius:0}

@@ -43,12 +43,10 @@
             <output id="batV">2</output>
             <button type="button" id="batP" aria-label="More bathrooms">+</button>
           </div></div>
-        <div class="field">
-          <label for="zip">ZIP code</label>
-          <input id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" aria-describedby="zipHelp zipErr" placeholder="For example, 80202">
-          <div class="help" id="zipHelp">We use your ZIP to compare nearby rentals.</div>
-          <div class="err" id="zipErr" role="alert"></div>
-        </div>
+        <div class="row zrow"><label class="lbl" for="zip">ZIP code</label>
+          <input id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" aria-describedby="zipHelp zipErr" placeholder="80202"></div>
+        <div class="help" id="zipHelp">We use your ZIP to compare nearby rentals.</div>
+        <div class="err" id="zipErr" role="alert"></div>
         <button class="btn" type="submit">See my estimate</button>
       </div>
       <div id="v2" class="view" hidden>

@@ -449,3 +449,11 @@ footer.site .flogo{filter:none}
 #v2 .next-note{margin:0;font-size:.98rem;color:var(--muted)}
 #v2 .next-note b{display:block;color:var(--ink);font-size:.98rem;margin-bottom:2px}
 #v2 .v2next .btn{margin-top:16px}
+
+/* estimate inputs: no dividers, ZIP lines up with the steppers */
+#v1 .row{border-bottom:0;padding:10px 0}
+#v1 .zrow input{width:146px;height:48px;border:2px solid var(--field);border-radius:12px;padding:0 14px;font:600 1.1rem var(--font-b);text-align:center;letter-spacing:.04em;background:var(--surface);color:var(--text)}
+#v1 #zipHelp{margin-top:2px;text-align:right}
+#v1 #zipErr{text-align:right}
+#v1 .btn{margin-top:20px}
+#v1 #zipHelp,#v1 #zipErr{text-align:left}

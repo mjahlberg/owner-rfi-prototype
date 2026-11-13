@@ -103,11 +103,26 @@
     var w=TYPEW[ptype()]||1,rlo=r100(s.lo*w),rhi=r100(s.hi*w);
     var T=typeShort(),Tc=T.charAt(0).toUpperCase()+T.slice(1);
     txt($('earnSub'),s.beds+'-bedroom '+T+' at '+(exact?exact.street:h0));
-    $('rvEst').innerHTML='';$('rvEst').append(money(r[0])+' to '+money(r[1]),mk('span',null,' a year'));
     txt($('rvDelta'),'Narrowed from your first estimate of '+money(rlo)+' to '+money(rhi)+'.'+(furn==='Not yet'?' Assumes your place is furnished.':''));
     txt($('rvNight'),'About '+money(nightly));
-    txt($('rvNights'),'About '+nights);
-    txt($('rvKeep'),money(r100(r[0]*(1-fee)))+'–'+money(r100(r[1]*(1-fee))));
+    /* range bar: the first estimate narrows to the exact one */
+    var lo=rlo*.9,hi=rhi*1.05,pc=function(v){return ((v-lo)/(hi-lo)*100).toFixed(1)+'%'};
+    var wb=$('rbWide'),eb=$('rbExact');wb.style.left=pc(rlo);wb.style.right=(100-parseFloat(pc(rhi)))+'%';
+    eb.classList.remove('go');eb.style.left=pc(rlo);eb.style.right=(100-parseFloat(pc(rhi)))+'%';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){eb.classList.add('go');eb.style.left=pc(r[0]);eb.style.right=(100-parseFloat(pc(r[1])))+'%'})});
+    /* keep weeks for yourself: winter weeks cost less than summer ones */
+    function kwUpdate(){
+      var wk=+$('kw').value,cost=0;for(var i=0;i<wk;i++)cost+=i<8?.6:1.2;
+      var f=Math.max(0,1-cost/52),a=r100(r[0]*f),b=r100(r[1]*f);
+      $('rvEst').innerHTML='';$('rvEst').append(money(a)+' to '+money(b),mk('span',null,' a year'));
+      txt($('rvNights'),'About '+Math.round(nights*f));
+      txt($('rvKeep'),money(r100(a*(1-fee)))+'–'+money(r100(b*(1-fee))));
+      txt($('kwOut'),wk===0?'None':plural(wk,'week','weeks'));
+      $('kw').setAttribute('aria-valuetext',plural(wk,'week','weeks')+', '+money(a)+' to '+money(b)+' a year');
+      $('kw').style.setProperty('--p',(wk/12*100)+'%');
+      s.keepWeeks=wk;
+    }
+    $('kw').oninput=kwUpdate;kwUpdate();
     txt($('rvKeepL'),'you’d keep on '+plan+' ('+Math.round(fee*100)+'% fee)');
     txt($('rvCovT'),'What your '+Math.round(fee*100)+'% covers');
     /* how you compare: the owner's place beside two Evolve homes */
@@ -213,11 +228,11 @@
       var r=range();
       $('q7').textContent='You’re all set, '+fn;
       $('dn').textContent='Your estimate is on its way to '+v+'.';
-      $('dEst').textContent=money(r[0])+' to '+money(r[1])+' a year';
+      $('dEst').textContent=$('rvEst').textContent.replace(' a year','')+' a year';
       $('dAddr').textContent=addr();
       var tg=$('dTags');tg.textContent='';
       var dd=$('desc').value.trim();$('dDesc').hidden=!dd;if(dd){dd=dd.replace(/[.]+$/,'');$('dDesc').textContent='“'+dd.charAt(0).toUpperCase()+dd.slice(1)+'”'}
-      [ptype(),plural(s.beds,'bed','beds')+', '+plural(s.baths,'bath','baths'),one('furn'),one('rent')==='Not right now'?'Not rented yet':one('rent').replace('Yes, ','')].concat(s.plan?[s.plan+' plan']:[]).forEach(function(t){var li=document.createElement('li');li.textContent=t;tg.append(li)});
+      [ptype(),plural(s.beds,'bed','beds')+', '+plural(s.baths,'bath','baths'),one('furn'),one('rent')==='Not right now'?'Not rented yet':one('rent').replace('Yes, ','')].concat(s.keepWeeks?['Keeps '+plural(s.keepWeeks,'week','weeks')]:[]).concat(s.plan?[s.plan+' plan']:[]).forEach(function(t){var li=document.createElement('li');li.textContent=t;tg.append(li)});
       var ns=$('nextsteps');ns.textContent='';
       (p==='talk'?[
         ['Now','Your full estimate is in your inbox.'],

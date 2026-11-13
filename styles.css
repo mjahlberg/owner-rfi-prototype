@@ -499,3 +499,26 @@ footer.site .flogo{filter:none}
 .earn .cp{margin-top:4px;font-size:.95rem;font-weight:700;color:var(--ink)}
 @media (max-width:760px){.earn .rv-stats{grid-template-columns:1fr 1fr;gap:16px 24px}.earn .rv-covers ul{grid-template-columns:1fr}}
 @media (max-width:560px){.earn .comps{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory}}
+
+/* range bar */
+.rbar{position:relative;height:10px;margin:14px 0 2px;border-radius:999px;background:var(--alt);max-width:520px}
+.rbar i{position:absolute;top:0;bottom:0;border-radius:999px}
+.rb-wide{background:#c9e2e6}
+.rb-exact{background:var(--ink)}
+.rb-exact.go{transition:left .9s cubic-bezier(.2,.7,.2,1) .25s,right .9s cubic-bezier(.2,.7,.2,1) .25s}
+/* keep weeks slider */
+.keepweeks{margin-top:24px;padding:16px 18px;border-radius:14px;background:var(--alt);max-width:560px}
+.kw-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.kw-top label{font-weight:700;color:var(--ink)}
+.kw-top output{font:800 1.05rem var(--font-d);color:var(--ink);font-variant-numeric:tabular-nums}
+#kw{width:100%;margin:12px 0 6px;height:28px;background:transparent;-webkit-appearance:none;appearance:none;--p:0%}
+#kw::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:linear-gradient(to right,var(--ink) var(--p),#cfd9db var(--p))}
+#kw::-moz-range-track{height:6px;border-radius:999px;background:#cfd9db}
+#kw::-moz-range-progress{height:6px;border-radius:999px;background:var(--ink)}
+#kw::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-9px;border-radius:50%;background:#fff;border:3px solid var(--ink);cursor:pointer}
+#kw::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--ink);cursor:pointer}
+#kw:focus-visible{outline:3px solid var(--focus);outline-offset:4px;border-radius:8px}
+.kw-note{margin:0;font-size:.9rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.rb-exact.go{transition:none}}
+.kw-top output{white-space:nowrap}
+@media (max-width:560px){.kw-top label{font-size:.95rem}.earn .rv-stats div{justify-content:flex-start}.earn .rv-stats{align-items:start}}

@@ -235,6 +235,12 @@
           <div class="rv-main">
             <b class="rv-big" id="rvEst"></b>
             <small id="rvDelta"></small>
+            <div class="rbar" aria-hidden="true"><i class="rb-wide" id="rbWide"></i><i class="rb-exact" id="rbExact"></i></div>
+          </div>
+          <div class="keepweeks">
+            <div class="kw-top"><label for="kw">Weeks you keep for yourself</label><output id="kwOut" for="kw">0 weeks</output></div>
+            <input type="range" id="kw" min="0" max="12" step="1" value="0" aria-describedby="kwNote">
+            <p class="kw-note" id="kwNote">Block the weeks you want to use your place. Summer books fastest, so winter weeks cost you less.</p>
           </div>
           <dl class="rv-stats">
             <div><dd id="rvNight"></dd><dt>a night</dt></div>

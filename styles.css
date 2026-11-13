@@ -583,3 +583,4 @@ footer.site .flogo{filter:none}
 .earn .keepweeks{margin-top:20px;padding:12px 16px;background:var(--alt);border-radius:12px;grid-template-columns:auto minmax(120px,280px) auto;justify-content:start;gap:20px}
 .earn .rv-covers{border-top:0;margin-top:28px;padding-top:0}
 @media (max-width:560px){.earn .keepweeks{grid-template-columns:1fr auto}}
+.earn .keepweeks{grid-template-columns:auto minmax(120px,1fr) auto}

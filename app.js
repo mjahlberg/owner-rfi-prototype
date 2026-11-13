@@ -70,7 +70,7 @@
   function hood(){var z=$('az').value||zip.value;return HOOD[z]||('ZIP '+z)}
   function range(){
     var w=TYPEW[ptype()]||1;
-    if(exact)return [r100(exact.f*s.rev*w*.92),r100(exact.f*s.rev*w*1.08)];
+    if(exact){var lo=s.lo,hi=s.hi,a=Math.max(lo,r100(exact.f*s.rev*w*.92)),b=Math.min(hi,r100(exact.f*s.rev*w*1.08));return [a,b]}
     return [r100(s.lo*w),r100(s.hi*w)];
   }
   function strip(){
@@ -114,13 +114,13 @@
     hits.sort(function(a,b){return a[0]-b[0]});var l=hits.map(function(x){return x[1]}).slice(0,3);
     return cap(l.length<3?l.join(', '):l[0]+', '+l[1]+', and '+l[2]);
   }
-  var COVERS={Core:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>','Professional photos','Plus a listing written for your home'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>','Listed everywhere guests book','Airbnb, Vrbo, Booking.com, and more'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','Damage protection','Up to $5,000, plus $1M liability insurance']],
+  var COVERS={Core:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>','Professional photos','Plus a listing written for your home'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>','Listed on every major site','Airbnb, Vrbo, Booking.com, and more'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','Damage protection','Up to $5,000, plus $1M liability insurance']],
     Plus:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>','A dedicated advisor','Reviews and tunes your listing'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 10 11l4 4 6-7"/><path d="M15 8h5v5"/></svg>','More listing exposure','Higher placement where guests search'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','More damage protection','Up to $10,000, plus $1M liability insurance']]};
   function listing(){
     var r=range(),furn=one('furn'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
     var mid=(r[0]+r[1])/2,nights=Math.round(365*OCC),nightly=Math.round(mid/nights/5)*5;
     var plan=s.plan==='Plus'?'Plus':'Core',fee=plan==='Plus'?.15:.10;
-    var w=TYPEW[ptype()]||1,rlo=r100(s.lo*w),rhi=r100(s.hi*w);
+    var rlo=s.lo,rhi=s.hi;
     var T=typeShort(),Tc=T.charAt(0).toUpperCase()+T.slice(1);
     txt($('earnSub'),s.beds+'-bedroom '+T+' at '+(exact?exact.street:h0));
     txt($('rvDelta'),'Narrowed from your first estimate of '+money(rlo)+' to '+money(rhi)+'.'+(furn==='Not yet'?' Assumes your place is furnished.':''));
@@ -185,10 +185,10 @@
     $('strip').hidden=true;
     if(n===5)listing();
     wiz.classList.toggle('wide',n===5);
-    $('wzFoot').hidden=n>=7;
-    $('wzBack').textContent='Back';
+    $('wzFoot').hidden=n===7;
+    $('wzBack').textContent=n===8?'Change my answers':'Back';
     var nx=$('wzNext'),p=one('path');
-    nx.textContent=n===0?'Get started':n===4?'See my exact estimate':n===5?'Continue':n===6?'Send my estimate':'Next';
+    nx.textContent=n===0?'Get started':n===4?'See my exact estimate':n===5?'Continue':n===6?'Send my estimate':n===8?($('nfForm').hidden?'Back to Evolve':'Let me know if that changes'):'Next';
     nx.classList.add('ink');
     wiz.classList.toggle('ov',n===0);
     $('wzMain').scrollTop=0;$('q'+n).focus();
@@ -210,10 +210,10 @@
     b.onclick=function(){s.plan=b.dataset.plan;if(s.lo)openWiz();else toEstimate()};
   });
   $('closeBtn').onclick=function(){if(s.lo){s.plan='';openWiz()}else toEstimate()};$('wzExit').onclick=closeWiz;$('wzDone').onclick=closeWiz;
-  $('wzBack').onclick=function(){if(cur<=1)closeWiz();else go(cur===4?2:cur-1)};
+  $('wzBack').onclick=function(){if(cur===8)nfBackFn();else if(cur<=1)closeWiz();else go(cur===4?2:cur-1)};
   $('lstEdit').onclick=function(){go(1)};
-  $('nfBack').onclick=function(){document.querySelectorAll('input[name="ptype"],input[name="ptype2"],input[name="space"]').forEach(function(i){i.checked=false});$('elseBox').hidden=true;go(1)};
-  $('nfGo').onclick=function(){
+  var nfBackFn=function(){document.querySelectorAll('input[name="ptype"],input[name="ptype2"],input[name="space"]').forEach(function(i){i.checked=false});$('elseBox').hidden=true;go(1)};
+  var nfGoFn=function(){
     var v=$('nfEmail').value.trim();
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){$('nfErr').textContent='Enter a valid email address, like you@example.com.';$('nfEmail').focus();return}
     $('nfErr').textContent='';$('nfForm').hidden=true;$('nfSent').hidden=false;
@@ -225,6 +225,7 @@
   $('az').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').slice(0,5)});
   $('wzForm').addEventListener('submit',function(e){
     e.preventDefault();
+    if(cur===8){if($('nfForm').hidden){closeWiz();return}nfGoFn();if($('nfForm').hidden)$('wzNext').textContent='Back to Evolve';return}
     if(cur===1){
       var t=ptype();
       if(!t){$('tyErr').textContent=one('ptype')==='Something else'?'Choose the closest match.':'Choose the kind of place it is.';return}

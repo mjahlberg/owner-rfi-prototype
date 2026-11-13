@@ -522,3 +522,16 @@ footer.site .flogo{filter:none}
 @media (prefers-reduced-motion:reduce){.rb-exact.go{transition:none}}
 .kw-top output{white-space:nowrap}
 @media (max-width:560px){.kw-top label{font-size:.95rem}.earn .rv-stats div{justify-content:flex-start}.earn .rv-stats{align-items:start}}
+/* wizard: content and buttons travel together, centered when short */
+.wz-head{padding-top:8px;padding-bottom:8px}
+.wz-prog{margin-top:8px}
+.wz-main{display:flex;flex-direction:column}
+.wz-in{width:100%;margin:auto auto 0}
+.wz-foot{width:100%;margin:0 auto auto;padding:40px 24px 8px}
+.wiz .wz-row{width:100%}
+@media (max-width:760px){
+  .wz-in{margin:0 auto}
+  .wz-foot{position:sticky;bottom:calc(-1 * 28px);margin-top:auto;background:var(--bg);padding:14px 0 calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+}
+.pane[data-i="2"] fieldset .chips{margin-top:0}
+.pane[data-i="2"] .q{margin-bottom:24px}

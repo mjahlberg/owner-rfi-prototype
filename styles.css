@@ -535,3 +535,25 @@ footer.site .flogo{filter:none}
 }
 .pane[data-i="2"] fieldset .chips{margin-top:0}
 .pane[data-i="2"] .q{margin-bottom:24px}
+
+/* fixed bottom navigation for the flow */
+.wz-main{display:block}
+.wz-in{margin:0 auto}
+.wz-foot{position:static;margin:0;width:auto;border-top:1px solid var(--line);background:var(--bg);padding:14px 24px calc(14px + env(safe-area-inset-bottom,0px))}
+.wz-btns{justify-content:space-between}
+#wzBack{display:inline-flex;align-items:center;justify-content:center;min-height:52px;min-width:120px;padding:0 24px;border:2px solid var(--ink);border-radius:10px;background:transparent;color:var(--ink);font:700 1.05rem var(--font-b);text-decoration:none}
+#wzBack:hover{background:#e8f3f5}
+@media (max-width:760px){.wz-foot{position:static;padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px))}#wzBack{min-width:96px}}
+/* reveal refinements */
+.earn .keepweeks{max-width:none}
+.earn .rv-stats{grid-template-columns:repeat(3,1fr);gap:16px 32px}
+.earn .rv-stats dt{font-size:.88rem;color:var(--muted)}
+.earn .rv-stats dd{margin-top:2px;font-size:1.25rem}
+.earn .rv-big span{font:600 1.05rem var(--font-b);color:var(--muted)}
+.earn .rv-covers ul{grid-auto-rows:1fr;gap:12px}
+.earn .rv-covers li{background:var(--alt);border-radius:12px;padding:14px 16px}
+@media (max-width:760px){.earn .rv-stats{grid-template-columns:1fr 1fr}.earn .rv-covers ul{grid-auto-rows:auto}}
+/* comparison cards: price lines up at the bottom */
+.earn .comp{display:flex;flex-direction:column}
+.earn .cbd{flex:1;display:flex;flex-direction:column}
+.earn .cp{margin-top:auto;padding-top:6px}

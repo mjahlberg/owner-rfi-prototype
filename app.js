@@ -96,6 +96,24 @@
   var COMPDATA={'Denver':[
       {img:'images/comp-cottage.jpg',pos:'50% 50%',area:'Congress Park',fun:'Flower boxes on a quiet street near Cheesman Park',bd:0,ba:0,rt:'4.92',rv:62},
       {img:'images/comp-picket-fence.jpg',pos:'50% 50%',area:'Cheesman Park',fun:'Picket fence, big trees, and a short walk to Colfax',bd:-1,ba:-1,rt:'4.87',rv:38}]};
+  /* Turn a few words into a listing-style line. Short keyword input gets
+     rewritten; anything longer is only tidied, so the owner's words stay theirs.
+     In production this would be a language model, not a keyword list. */
+  var POLISH=[[/\bski|slopes?\b/i,'close to the ski slopes'],[/\bdowntown|town|main st/i,'short walk to town'],[/\blake/i,'steps from the lake'],
+    [/\bbeach|ocean|coast/i,'near the beach'],[/\bmountains?|views?\b/i,'mountain views'],[/\bhot ?tub|jacuzzi|spa\b/i,'hot tub'],
+    [/\bfire ?place|wood ?stove/i,'cozy fireplace'],[/\bporch|deck|patio/i,'sunny porch'],[/\bfruit trees?/i,'fruit trees'],
+    [/\byard|garden/i,'big yard'],[/\bbuilt in (\d{4})/i,'built in $1'],[/\bhistoric|victorian|old\b/i,'historic charm'],
+    [/\bquiet|peaceful/i,'quiet street'],[/\bpool\b/i,'pool'],[/\bwalkable|walk\b/i,'walkable to everything'],
+    [/\bupdated|remodel|renovat|modern/i,'freshly updated'],[/\bpets?|dogs?\b/i,'pet friendly'],[/\bpark\b/i,'near the park']];
+  function polish(t){
+    t=(t||'').replace(/\s+/g,' ').trim().replace(/[.]+$/,'');if(!t)return '';
+    var cap=function(x){return x.charAt(0).toUpperCase()+x.slice(1)};
+    if(/,/.test(t)||t.split(' ').length>=6)return cap(t);
+    var hits=[];POLISH.forEach(function(p){var m=t.match(p[0]);if(m){var ph=p[1].replace('$1',m[1]||'');if(!hits.some(function(h){return h[1]===ph}))hits.push([m.index,ph])}});
+    if(!hits.length)return cap(t);
+    hits.sort(function(a,b){return a[0]-b[0]});var l=hits.map(function(x){return x[1]}).slice(0,3);
+    return cap(l.length<3?l.join(', '):l[0]+', '+l[1]+', and '+l[2]);
+  }
   function listing(){
     var r=range(),furn=one('furn'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
     var mid=(r[0]+r[1])/2,nights=Math.round(365*OCC),nightly=Math.round(mid/nights/5)*5;
@@ -104,18 +122,13 @@
     var T=typeShort(),Tc=T.charAt(0).toUpperCase()+T.slice(1);
     txt($('earnSub'),s.beds+'-bedroom '+T+' at '+(exact?exact.street:h0));
     txt($('rvDelta'),'Narrowed from your first estimate of '+money(rlo)+' to '+money(rhi)+'.'+(furn==='Not yet'?' Assumes your place is furnished.':''));
-    txt($('rvNight'),'About '+money(nightly));
-    /* range bar: the first estimate narrows to the exact one */
-    var lo=rlo*.9,hi=rhi*1.05,pc=function(v){return ((v-lo)/(hi-lo)*100).toFixed(1)+'%'};
-    var wb=$('rbWide'),eb=$('rbExact');wb.style.left=pc(rlo);wb.style.right=(100-parseFloat(pc(rhi)))+'%';
-    eb.classList.remove('go');eb.style.left=pc(rlo);eb.style.right=(100-parseFloat(pc(rhi)))+'%';
-    requestAnimationFrame(function(){requestAnimationFrame(function(){eb.classList.add('go');eb.style.left=pc(r[0]);eb.style.right=(100-parseFloat(pc(r[1])))+'%'})});
+    txt($('rvNight'),money(nightly));
     /* keep weeks for yourself: winter weeks cost less than summer ones */
     function kwUpdate(){
       var wk=+$('kw').value,cost=0;for(var i=0;i<wk;i++)cost+=i<8?.6:1.2;
       var f=Math.max(0,1-cost/52),a=r100(r[0]*f),b=r100(r[1]*f);
-      $('rvEst').innerHTML='';$('rvEst').append(money(a)+' to '+money(b),mk('span',null,' a year'));
-      txt($('rvNights'),'About '+Math.round(nights*f));
+      $('rvEst').innerHTML='';$('rvEst').append(money(a)+'–'+money(b),mk('span',null,' / year'));
+      var nn=nights*f,r5=function(v){return Math.round(v/5)*5};txt($('rvNights'),r5(nn*.93)+'–'+r5(nn*1.03));
       txt($('rvKeep'),money(r100(a*(1-fee)))+'–'+money(r100(b*(1-fee))));
       txt($('kwOut'),wk===0?'None':plural(wk,'week','weeks'));
       $('kw').setAttribute('aria-valuetext',plural(wk,'week','weeks')+', '+money(a)+' to '+money(b)+' a year');
@@ -123,7 +136,7 @@
       s.keepWeeks=wk;
     }
     $('kw').oninput=kwUpdate;kwUpdate();
-    txt($('rvKeepL'),'you’d keep on '+plan+' ('+Math.round(fee*100)+'% fee)');
+    txt($('rvKeepL'),'Amount you keep after '+plan);
     txt($('rvCovT'),'What your '+Math.round(fee*100)+'% covers');
     /* how you compare: the owner's place beside two Evolve homes */
     var cs=$('comps');cs.textContent='';
@@ -135,7 +148,7 @@
       c.append(bd);cs.append(c);
     }
     var mp=mk('div','cph');mp.innerHTML=HOUSE_SVG;mp.append(mk('span',null,'Your place'));
-    var d=$('desc').value.trim().replace(/[.]+$/,'');
+    var d=polish($('desc').value);
     card('mine',mp,Tc+' in '+area,mk('span','ctag','Estimated'),d?d.charAt(0).toUpperCase()+d.slice(1):'',plural(s.beds,'bedroom','bedrooms')+' · '+plural(s.baths,'bath','baths'),'About '+money(nightly)+' a night');
     var list=COMPDATA[city]||[
       {img:'images/comp-cottage.jpg',pos:'50% 50%',area:area,fun:'Quiet street close to shops and parks',bd:0,ba:0,rt:'4.9',rv:54},
@@ -228,10 +241,10 @@
       var r=range();
       $('q7').textContent='You’re all set, '+fn;
       $('dn').textContent='Your estimate is on its way to '+v+'.';
-      $('dEst').textContent=$('rvEst').textContent.replace(' a year','')+' a year';
+      $('dEst').textContent=$('rvEst').textContent.replace(' / year','')+' a year';
       $('dAddr').textContent=addr();
       var tg=$('dTags');tg.textContent='';
-      var dd=$('desc').value.trim();$('dDesc').hidden=!dd;if(dd){dd=dd.replace(/[.]+$/,'');$('dDesc').textContent='“'+dd.charAt(0).toUpperCase()+dd.slice(1)+'”'}
+      var dd=polish($('desc').value);$('dDesc').hidden=!dd;if(dd)$('dDesc').textContent='“'+dd+'”';
       [ptype(),plural(s.beds,'bed','beds')+', '+plural(s.baths,'bath','baths'),one('furn'),one('rent')==='Not right now'?'Not rented yet':one('rent').replace('Yes, ','')].concat(s.keepWeeks?['Keeps '+plural(s.keepWeeks,'week','weeks')]:[]).concat(s.plan?[s.plan+' plan']:[]).forEach(function(t){var li=document.createElement('li');li.textContent=t;tg.append(li)});
       var ns=$('nextsteps');ns.textContent='';
       (p==='talk'?[

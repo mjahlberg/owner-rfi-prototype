@@ -468,3 +468,4 @@ footer.site .flogo{filter:none}
 .field.desc input{margin-top:6px}
 .mine-quote{margin:2px 0 0;font:600 1.15rem/1.4 var(--font-d);color:var(--accent)}
 .ddesc{font-style:italic;color:var(--ink);font-size:.98rem}
+#v1 .zrow input{text-align:left}

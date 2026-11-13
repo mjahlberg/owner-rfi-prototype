@@ -585,3 +585,8 @@ footer.site .flogo{filter:none}
 @media (max-width:560px){.earn .keepweeks{grid-template-columns:1fr auto}}
 .earn .keepweeks{grid-template-columns:auto minmax(120px,1fr) auto}
 #phHint{margin-top:6px}
+
+.earn .keepweeks{padding:16px 20px;gap:28px}
+.earn .rv-stats{column-gap:12px}
+.space .paths{align-items:stretch}
+.space .path span{height:100%}

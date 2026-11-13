@@ -257,8 +257,8 @@
       $('dEst').textContent=$('rvEst').textContent.replace(' / year','')+' a year';
       $('dAddr').textContent=addr();
       var tg=$('dTags');tg.textContent='';
-      var dd=polish($('desc').value);$('dDesc').hidden=!dd;if(dd)$('dDesc').textContent='“'+dd+'”';
-      [ptype(),plural(s.beds,'bed','beds')+', '+plural(s.baths,'bath','baths'),one('furn'),one('rent')==='Not right now'?'Not rented yet':one('rent').replace('Yes, ','')].concat(s.keepWeeks?['Keeps '+plural(s.keepWeeks,'week','weeks')]:[]).concat(s.plan?[s.plan+' plan']:[]).forEach(function(t){var li=document.createElement('li');li.textContent=t;tg.append(li)});
+      $('dDesc').hidden=true;
+      [ptype(),plural(s.beds,'bed','beds')+', '+plural(s.baths,'bath','baths'),one('furn'),one('rent')==='Not right now'?'Not rented yet':(function(x){return x.charAt(0).toUpperCase()+x.slice(1)})(one('rent').replace('Yes, ',''))].concat(s.keepWeeks?['Keeps '+plural(s.keepWeeks,'week','weeks')]:[]).concat(s.plan?[s.plan+' plan']:[]).forEach(function(t){var li=document.createElement('li');li.textContent=t;tg.append(li)});
       var ns=$('nextsteps');ns.textContent='';
       (p==='talk'?[
         ['Now','Your full estimate is in your inbox.'],
@@ -283,3 +283,9 @@
 
 /* footer links are placeholders */
 document.querySelectorAll('footer.site a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault()})});
+
+/* format phone numbers as (303) 555-0123 while typing */
+(function(){var ph=document.getElementById('ph');if(!ph)return;ph.addEventListener('input',function(){
+  var d=ph.value.replace(/\D/g,'').slice(0,10),o=d;
+  if(d.length>6)o='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);else if(d.length>3)o='('+d.slice(0,3)+') '+d.slice(3);else if(d.length===3)o='('+d+')';
+  ph.value=o;});})();

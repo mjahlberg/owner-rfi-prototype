@@ -30,7 +30,7 @@
     s.rev=(9000+s.beds*8200+s.baths*2600)*m;
     s.lo=r100(s.rev*.85);s.hi=r100(s.rev*1.15);
     $('sum').textContent=plural(s.beds,'bedroom','bedrooms')+', '+plural(s.baths,'bathroom','bathrooms')+', ZIP '+zip.value;
-    $('res').innerHTML='<div class="big">'+money(s.lo)+' to '+money(s.hi)+'</div>';
+    $('res').innerHTML='<div class="big">'+money(s.lo)+'–'+money(s.hi)+'</div>';
     planKeep();
   }
   $('edit').onclick=function(){cardView(1)};

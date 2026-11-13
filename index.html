@@ -52,13 +52,15 @@
         <button class="btn" type="submit">See my estimate</button>
       </div>
       <div id="v2" class="view" hidden>
-        <h2 id="v2t" tabindex="-1">Your rough yearly estimate</h2>
-        <p class="sumline" id="sum"></p>
-        <button class="linkbtn" type="button" id="edit">Edit details</button>
-        <div class="result" id="res"></div>
-        <p class="next-note"><b>Want to know exactly what you could earn with Evolve?</b> Answer a few quick questions about your place.</p>
-        <button class="btn" type="button" id="start">Get my exact estimate</button>
-        <p class="note startnote">Takes about 2 minutes.</p>
+        <div class="v2top">
+          <h2 id="v2t" tabindex="-1">Your rough yearly estimate</h2>
+          <p class="sumline"><span id="sum"></span><button class="linkbtn edit" type="button" id="edit" aria-label="Edit bedrooms, bathrooms, and ZIP">Edit</button></p>
+          <div class="result" id="res"></div>
+        </div>
+        <div class="v2next">
+          <p class="next-note"><b>Want to know exactly what you could earn?</b> Answer a few questions about your place. It takes about 2 minutes.</p>
+          <button class="btn" type="button" id="start">Get my exact estimate</button>
+        </div>
       </div>
     </form>
   </div>

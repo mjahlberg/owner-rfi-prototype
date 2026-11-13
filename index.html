@@ -252,15 +252,16 @@
         <section class="compsec" aria-labelledby="compT"><h3 id="compT">How your place compares nearby</h3><ul class="comps" id="comps"></ul></section>
       </div>
 
-      <div class="pane" data-i="6" hidden><h2 class="q" id="q6" tabindex="-1">Where should we send your estimate?</h2>
+      <div class="pane" data-i="6" hidden><h2 class="q" id="q6" tabindex="-1">Get your full estimate and meet your advisor</h2>
+        <p class="help">We’ll email your estimate, and a vacation rental advisor will follow up to answer your questions. No commitment.</p>
         <div class="g2"><div class="field"><label for="fn">First name</label><input id="fn" autocomplete="given-name"></div>
         <div class="field"><label for="ln">Last name</label><input id="ln" autocomplete="family-name"></div></div>
         <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
-        <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="(303) 555-0123"></div>
-        <fieldset class="space"><legend>Want to talk with an advisor?</legend>
+        <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="(303) 555-0123" aria-describedby="phHint"><div class="help" id="phHint">We’ll only call at a time you pick.</div></div>
+        <fieldset class="space"><legend>When would you like to hear from us?</legend>
           <div class="paths">
-            <label class="path"><input type="radio" name="path" value="talk"><span><b>Yes, set up a call</b><em>We’ll email you today to find a time that works.</em></span></label>
-            <label class="path"><input type="radio" name="path" value="email"><span><b>Not yet, just send my estimate</b><em>Take your time. Reach out whenever you’re ready.</em></span></label>
+            <label class="path"><input type="radio" name="path" value="talk"><span><b>Soon, I’m ready to talk</b><em>Your advisor emails today to set up a call.</em></span></label>
+            <label class="path"><input type="radio" name="path" value="email"><span><b>In a few days, I’m still exploring</b><em>Your advisor checks in later this week.</em></span></label>
           </div></fieldset>
         <div class="err" id="ctErr" role="alert"></div></div>
 

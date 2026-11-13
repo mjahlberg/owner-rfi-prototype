@@ -584,3 +584,4 @@ footer.site .flogo{filter:none}
 .earn .rv-covers{border-top:0;margin-top:28px;padding-top:0}
 @media (max-width:560px){.earn .keepweeks{grid-template-columns:1fr auto}}
 .earn .keepweeks{grid-template-columns:auto minmax(120px,1fr) auto}
+#phHint{margin-top:6px}

@@ -115,7 +115,7 @@
     return cap(l.length<3?l.join(', '):l[0]+', '+l[1]+', and '+l[2]);
   }
   var COVERS={Core:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2.5h6L17 8h3v11H4Z"/><circle cx="12" cy="13" r="3.5"/></svg>','Professional photos','Plus a listing written for your home'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>','Listed on every major site','Airbnb, Vrbo, Booking.com, and more'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','Damage protection','Up to $5,000, plus $1M liability insurance']],
-    Plus:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>','A dedicated advisor','Reviews and tunes your listing'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 10 11l4 4 6-7"/><path d="M15 8h5v5"/></svg>','More listing exposure','Higher placement where guests search'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','More damage protection','Up to $10,000, plus $1M liability insurance']]};
+    Plus:[['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>','A performance advisor','Reviews and tunes your listing'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 10 11l4 4 6-7"/><path d="M15 8h5v5"/></svg>','More listing exposure','Higher placement where guests search'],['<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>','More damage protection','Up to $10,000, plus $1M liability insurance']]};
   function listing(){
     var r=range(),furn=one('furn'),h0=hood(),area=h0.split(',')[0],city=h0.indexOf(',')>-1?h0.split(', ')[1]:h0;
     var mid=(r[0]+r[1])/2,nights=Math.round(365*OCC),nightly=Math.round(mid/nights/5)*5;
@@ -248,7 +248,7 @@
       else if(!ln){err='Enter your last name.';foc='ln'}
       else if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){err='Enter a valid email address, like you@example.com.';foc='email'}
       else if(ph.length!==10){err='Enter a 10-digit phone number.';foc='ph'}
-      else if(!p)err='Choose whether you’d like to talk with an advisor.';
+      else if(!p)err='Choose when you’d like to hear from us.';
       if(err){$('ctErr').textContent=err;if(foc)$(foc).focus();return}
       $('ctErr').textContent='';
       var r=range();
@@ -262,12 +262,12 @@
       var ns=$('nextsteps');ns.textContent='';
       (p==='talk'?[
         ['Now','Your full estimate is in your inbox.'],
-        ['Today','Your advisor emails you to find a time for a call. They’ll already have your details.'],
+        ['Today','Your advisor emails to find a time for a call. They’ll already have your details.'],
         ['On the call','20 minutes on your estimate, fees, and timeline. No commitment.']
       ]:[
         ['Now','Your full estimate is in your inbox.'],
-        ['In a few days','An advisor may email to answer questions.'],
-        ['When you’re ready','Reply or pick a time for a 20-minute walkthrough. No commitment.']
+        ['Later this week','Your advisor checks in by email. They’ll already have your details.'],
+        ['When you’re ready','Reply to set up a 20-minute call. No commitment.']
       ]).forEach(function(x){var li=document.createElement('li');var b=document.createElement('b');b.textContent=x[0];var sp=document.createElement('span');sp.textContent=x[1];li.append(b,sp);ns.append(li)});
     }
     go(cur===2?4:cur+1);

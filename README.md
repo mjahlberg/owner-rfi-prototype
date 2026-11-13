@@ -19,7 +19,7 @@ Today the flow opens with "See if you qualify," which puts the owner on trial. T
 3. **Where you're starting from.** Furnished or not, and whether it's rented out now. Both are one tap.
 4. **Your address.** Framed as the way to get an exact estimate for their home.
 5. **What your place could earn.** The exact estimate and how far it narrowed, the nightly rate and nights booked, what the owner keeps after Evolve's fee, what that fee covers, and similar Evolve homes nearby with the owner's place in the same row.
-6. **Where to send your estimate.** Name, email, and phone, then one choice: set up a call with an advisor, or just get the estimate for now. Sales can see which owners are ready, and the advisor emails to schedule instead of calling out of the blue.
+6. **Get your full estimate and meet your advisor.** The page says plainly that an advisor will follow up, then lets the owner pick the pace. "Soon, I'm ready to talk" or "In a few days, I'm still exploring." The advisor emails to schedule, and only calls at a time the owner picks. Sales can see who's ready.
 
 Owners whose property isn't a fit get a kind exit with an option to hear if that changes.
 

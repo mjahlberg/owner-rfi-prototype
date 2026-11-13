@@ -11,7 +11,7 @@
     });
     $('closeT').textContent='Your estimate: '+money(s.lo)+' to '+money(s.hi)+' a year';
     $('closeP').textContent='Set up your property in a few minutes. No commitment until you’re ready.';
-    $('closeBtn').textContent='Get started';
+    $('closeBtn').textContent='Get my exact estimate';
   }
   function validZip(v){return /^\d{5}$/.test(v)}
   function plural(n,a,b){return n+' '+(n===1?a:b)}

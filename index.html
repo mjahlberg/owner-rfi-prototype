@@ -211,6 +211,8 @@
             <label class="path"><input type="radio" name="space" value="whole"><span><svg class="pic" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5.5h4V20"/></svg><b>The entire place</b><em>Guests have the whole home to themselves.</em></span></label>
             <label class="path"><input type="radio" name="space" value="room"><span><svg class="pic" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"/><path d="M4 21h16"/><circle cx="14.5" cy="12" r=".8" fill="currentColor"/></svg><b>A room</b><em>Guests have their own room and share the rest of the home.</em></span></label>
           </div></fieldset>
+        <div class="field desc"><label for="desc">In a few words, what makes your place special? <span class="opt">(optional)</span></label>
+          <input id="desc" maxlength="80" autocomplete="off" placeholder="Sunny porch, two blocks from Cheesman Park"></div>
         <div class="err" id="tyErr" role="alert"></div>
         </div>
 
@@ -231,6 +233,7 @@
 
       <div class="pane earn" data-i="5" hidden><h2 class="q" id="q5" tabindex="-1">Here’s what your place could earn</h2>
         <p class="help" id="earnSub"></p>
+        <p class="mine-quote" id="earnDesc" hidden></p>
         <section class="reveal" aria-label="Your estimate">
           <div class="rv-main">
             <span class="rv-k">Estimated booking revenue</span>
@@ -266,6 +269,7 @@
           <span class="dk">Your estimate</span>
           <b class="dbig" id="dEst"></b>
           <span class="daddr" id="dAddr"></span>
+          <span class="ddesc" id="dDesc" hidden></span>
           <ul class="dtags" id="dTags"></ul>
         </section>
         <h3 class="nexth">What happens next</h3><ol class="nextsteps" id="nextsteps"></ol>

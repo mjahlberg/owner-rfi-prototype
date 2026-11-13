@@ -99,6 +99,7 @@
     var fee=s.plan==='Plus'?.15:.10,plan=s.plan==='Plus'?'Plus':'Core';
     var w=TYPEW[ptype()]||1,rlo=r100(s.lo*w),rhi=r100(s.hi*w);
     txt($('earnSub'),s.beds+'-bedroom '+typeShort()+' at '+(exact?exact.street:h0));
+    var d=$('desc').value.trim().replace(/[.]+$/,'');$('earnDesc').hidden=!d;if(d)txt($('earnDesc'),'“'+d.charAt(0).toUpperCase()+d.slice(1)+'”');
     $('rvEst').innerHTML='';$('rvEst').append(money(r[0])+' to '+money(r[1]),mk('span',null,' a year'));
     txt($('rvDelta'),'Narrowed from your first estimate of '+money(rlo)+' to '+money(rhi)+'.'+(furn==='Not yet'?' Assumes your place is furnished.':''));
     txt($('rvNight'),'About '+money(nightly));
@@ -209,6 +210,7 @@
       $('dEst').textContent=money(r[0])+' to '+money(r[1])+' a year';
       $('dAddr').textContent=addr();
       var tg=$('dTags');tg.textContent='';
+      var dd=$('desc').value.trim();$('dDesc').hidden=!dd;if(dd){dd=dd.replace(/[.]+$/,'');$('dDesc').textContent='“'+dd.charAt(0).toUpperCase()+dd.slice(1)+'”'}
       [ptype(),plural(s.beds,'bed','beds')+', '+plural(s.baths,'bath','baths'),one('furn'),one('rent')==='Not right now'?'Not rented yet':one('rent').replace('Yes, ','')].concat(s.plan?[s.plan+' plan']:[]).forEach(function(t){var li=document.createElement('li');li.textContent=t;tg.append(li)});
       var ns=$('nextsteps');ns.textContent='';
       (p==='talk'?[

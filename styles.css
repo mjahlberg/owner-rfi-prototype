@@ -436,3 +436,4 @@ footer.site .flogo{filter:none}
 .tdots{justify-content:center}
 .tcard::before{content:none}
 .next-note{margin-top:16px;font-size:.98rem;color:var(--text)}
+.next-note b{display:block;color:var(--ink);font-size:1.05rem;margin-bottom:2px}
